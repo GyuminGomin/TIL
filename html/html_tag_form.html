@@ -11,10 +11,24 @@
 <body>
     <!-- role binded input tag element -->
     <form>
-        검색어 입력 : <input type="text" /> <br/>
+        검색어 입력 : <input type="text" name="keyword" /> <br/>
         비밀번호 입력 : <input type="password" /> <br/>
-        <input type="text" placeholder="이름을 입력해 주세요." />
-        <input type="text" value="html" />
+        <input type="text" placeholder="이름을 입력해 주세요." /> <br/>
+        <input type="text" value="html" name="subject" /> <br/>
+        <label> <!--텍스트를 눌러도 체크박스가 인식되게 해줌-->
+            <input type="checkbox" name="accept" />
+            개인정보 이용에 동의 하시겠습니까?
+        </label>
+        <br/> <hr/>
+        <!--name이 같을 때, radio는 하나만, checkbox는 다중 가능-->
+        <input type="radio" name="car" /> 아반떼
+        <input type="radio" name="car" checked /> K3 <br/> <hr/>
+        <input type="checkbox" name="hobby" /> 축구
+        <input type="checkbox" name="hobby" checked /> 농구
+        <input type="checkbox" name="hobby" /> 게임
+        <input type="checkbox" name="hobby" /> html 공부
+        <br/> <hr/>
+        
     </form>
 </body>
 </html>
