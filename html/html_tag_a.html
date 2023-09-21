@@ -12,10 +12,15 @@
         절대 경로 (최상단 폴더나 웹사이트 주소가 기준)
         상대 경로 (현재 파일의 위치가 기준)
     -->
+    <hr/>
     <a href="http://www.naver.com">naver</a> <br/>
     <a href="\\10.100.205.231\public\workspace\html\html_tag_a.html">public</a> <br/>
-    <a href="index.html">index 1</a> <br/>
+    <!-- 
+        target 속성의 _blank를 통해 새창에 출력
+        target 속성의 _self 페이지를 현재창에 출력(default)
+    -->
+    <a href="index.html" target="_blank">index 1</a> <br/>
     <a href="./default.html">default 2</a> <br/>
-    <a href="./html_tag_word.html">word 3</a> <br/>
+    <a href="../html/html_tag_word.html">word 3</a> <br/>
 </body>
 </html>
