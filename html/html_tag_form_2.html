@@ -57,7 +57,24 @@
         <br/>
         <textarea name="content" cols="30" rows="5">aaaa</textarea>
         <br/>
-
+        <h3>HTML5 입력태그</h3>
+        <br/>
+        <!-- 날짜형식 -->
+        <input type="date" name="date" required /> <br/>
+        <!-- 이메일형식 -->
+        <input type="email" name="email" placeholder="이메일 입력" required /> <br/>
+        <!-- 숫자형식 -->
+        <input type="number" name="age" /> <br/>
+        <!-- 범위 슬라이드 -->
+        <input type="range" name="range" min="-50" max="100" value="0" /> <br/>
+        <!-- text와 동일 하나 삭제 버튼 추가 -->
+        <input type="search" /> <br/>
+        <!-- 색상 선택 상자 -->
+        <input type="color" name="color" /> <br/>
+        <!-- 이미지 제출 버튼 -->
+        <input type="image" src="\\10.100.205.231\public\강의자료\교육첨부\img/apple.png" alt="제출용 이미지 입니다." /> <br/>
+        <!-- 사용자에게 출력은 되지 않지만 form tag 제출 값으로 전송 됨. -->
+        <input type="hidden" name="hide" value="숨은값" /> <br/>
         <button type="submit">제출</button>
         <button type="button">TEST</button>
     </form>
