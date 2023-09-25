@@ -1,2 +1,55 @@
 <!-- 2_caccade_selector.html -->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            color: greenyellow;
+        }
+
+        h1 {
+            color: red;
+        }
+
+        /* 
+            id attribute : #
+            class attribute : .
+        */
+
+        #bg {
+            background-color: skyblue;
+        }
+
+        #color {
+            color: blue;
+        }
+
+        .color {
+            color: pink;
+        }
+
+        .size {
+            font-size: 50px;
+        }
+        /* Priority applied style according to selector :
+        inline > id > class > type > all */
+        h2 {
+            color: orange;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>TYPE 선택자</h1>
+    <h2 id="bg">선택자 적용</h2>
+    <!-- id attribute can have just one value -->
+    <h2 id="color bg">선택자 적용</h2>
+    <h2 class="color">선택자 적용</h2>
+    <!-- class attribute can have one or more values -->
+    <h2 style="color: black;" id="color" class="size color">선택자 적용</h2>
+</body>
+</html>
