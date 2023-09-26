@@ -1,0 +1,106 @@
+<!-- 7_struct_selector.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#wrap {
+            width: 260px;
+            height: 300px;
+            background-color: green;
+        }
+        div.box {
+            /* style attribute that changed batch direction */
+            float: left;
+            width: 30px;
+            height: 30px;
+            /* border thick style color */
+            border: 1px solid black;
+            /* margin top right bottom left */
+            margin: 0 5px 5px 0;
+        }
+        /* first element */
+        .box:first-child {
+            color: red;
+        }
+        /* even element */
+        .box:nth-child(2n) {
+            color: white;
+        }
+        /* odd element */
+        .box:nth-child(2n+3) {
+            color: blueviolet;
+        }
+        /* last element */
+        .box:last-child {
+            color: blue;
+        }
+        /* every 7th days, express in red background color - sunday */
+        .box:nth-child(7n) {
+            background-color: red;
+        }
+        /* the day before every 7th days, express in blue background color - saturday */
+        .box:nth-child(7n-1) {
+            background-color: blue;
+        }
+
+        /* virtual selector */
+        .before::before {
+            content: "used to Struct Selector ";
+            color: red;
+        }
+        .after::after {
+            content: " Adding content used to Virtual Selector";
+            color: blue;
+        }
+
+        p::first-line {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="before">Calender</h1>
+    <h2 class="after">Struct Selector</h2>
+    <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem at, repellendus nam rerum eos dignissimos magnam accusantium quidem totam earum quaerat ratione nihil assumenda quos deserunt cumque maiores vel harum?
+    </p>
+    <!-- div#wrap>div.box{$$}*31 -->
+    <div id="wrap">
+        <div class="box">01</div>
+        <div class="box">02</div>
+        <div class="box">03</div>
+        <div class="box">04</div>
+        <div class="box">05</div>
+        <div class="box">06</div>
+        <div class="box">07</div>
+        <div class="box">08</div>
+        <div class="box">09</div>
+        <div class="box">10</div>
+        <div class="box">11</div>
+        <div class="box">12</div>
+        <div class="box">13</div>
+        <div class="box">14</div>
+        <div class="box">15</div>
+        <div class="box">16</div>
+        <div class="box">17</div>
+        <div class="box">18</div>
+        <div class="box">19</div>
+        <div class="box">20</div>
+        <div class="box">21</div>
+        <div class="box">22</div>
+        <div class="box">23</div>
+        <div class="box">24</div>
+        <div class="box">25</div>
+        <div class="box">26</div>
+        <div class="box">27</div>
+        <div class="box">28</div>
+        <div class="box">29</div>
+        <div class="box">30</div>
+        <div class="box">31</div>
+    </div>
+</body>
+</html>
