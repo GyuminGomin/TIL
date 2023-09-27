@@ -7,29 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        * {
-            margin: 0;
+        .bg {
+            line-height: 150px;
         }
-        div {
-            text-align: center;
+        span {
+            float: left;
+        }
+        .card {
+            display: inline-block;
         }
         .img {
             height: 150px;
+            width: 100px;
         }
-        .bg {
-            height: 150px;
+        .card:hover {
+            background-image: url(실습자료/img/spade.png);
+            background-size: 100px 150px;
+            background-repeat: no-repeat;
         }
         .img:hover {
-            im
+            visibility: hidden;
         }
     </style>
 </head>
 <body>
     <h1>:hover 활용</h1> <hr/>
-    <div>
+    <div class="bg">
         <span>마우스를 올리면 카드의 앞면이 보인다.</span>
-        <img class="img" src="실습자료/img/back.png">
-        <img class="bg" src="실습자료/img/spade.png">
+        <div class="card">
+            <img class="img" src="실습자료/img/back.png">
+        </div>
     </div>
 </body>
 </html>
