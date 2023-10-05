@@ -3,9 +3,81 @@
 <head>
     <title>HTML5 기본 프로젝트</title>
     <style>
-        #page-wrapper {
+        #page-wrapper * {
             margin: 0;
             padding: 0;
+        }
+
+        #main-header hgroup {
+            margin: 50px;
+        }
+        #main-header hgroup h2 {
+            font-weight: lighter;
+            font-size: 1em;
+        }
+        
+
+        #main-navigation {
+            margin: 10px;
+            margin-left: 30px;
+        }
+        #main-navigation * {
+            display: inline;
+        }
+        #main-navigation>.pull-left {
+            text-align: left;
+        }
+        #main-navigation>.pull-left>.outer-menu {
+        }
+        #main-navigation>.pull-left>.outer-menu>.outer-menu-item {
+            display: inline;
+            margin-right: 30px;
+        }
+        #main-navigation>.pull-left>.outer-menu>.outer-menu-item>span {
+            font-weight: bolder;
+        }
+        #main-navigation>.pull-right {
+            display: inline-block;
+            float: right;
+        }
+        #main-navigation>.pull-right input {
+            height: 20px;
+        }
+        #main-navigation>.pull-right .input-search {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            float: left;
+        }
+        #main-navigation>.pull-right .input-search-submit {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            float: right;
+        }
+        #main-navigation .inner-menu {
+            display: none;
+        }
+
+        #content {
+            margin-top: 30px;
+            margin-left: 10px;
+        }
+
+        section {
+            float: left;
+            width: 80%;
+        }
+
+        article {
+            margin-top: 20px;
+        }
+
+        aside {
+            float: right;
+            width: 15%;
+        }
+
+        footer {
+            float: left;
         }
     </style>
 </head>
@@ -17,6 +89,7 @@
                 <h2 class="master-description">한국기술교육직업전문학교</h2>
             </hgroup>
         </header>
+        <hr/>
         <nav id="main-navigation">
             <div class="pull-left">
                 <ul class="outer-menu">
@@ -59,6 +132,7 @@
                 </div>
             </div>
         </nav>
+        <hr/>
         <div id="content">
             <section id="main-section">
                 <article>
