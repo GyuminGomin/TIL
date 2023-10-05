@@ -3,7 +3,7 @@
 <head>
     <title>HTML5 기본 프로젝트</title>
     <style>
-        #page-wrapper * {
+        * {
             margin: 0;
             padding: 0;
         }
@@ -15,70 +15,44 @@
             font-weight: lighter;
             font-size: 1em;
         }
-        
 
         #main-navigation {
-            margin: 10px;
-            margin-left: 30px;
+            display: inline-block;            
+            width: calc(100%);
+            padding: 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         }
+
         #main-navigation * {
             display: inline;
         }
-        #main-navigation>.pull-left {
-            text-align: left;
-        }
-        #main-navigation>.pull-left>.outer-menu {
-        }
-        #main-navigation>.pull-left>.outer-menu>.outer-menu-item {
-            display: inline;
-            margin-right: 30px;
-        }
-        #main-navigation>.pull-left>.outer-menu>.outer-menu-item>span {
-            font-weight: bolder;
-        }
-        #main-navigation>.pull-right {
-            display: inline-block;
-            float: right;
-        }
-        #main-navigation>.pull-right input {
-            height: 20px;
-        }
-        #main-navigation>.pull-right .input-search {
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-            float: left;
-        }
-        #main-navigation>.pull-right .input-search-submit {
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-            float: right;
-        }
-        #main-navigation .inner-menu {
+        #main-navigation .pull-left .inner-menu {
             display: none;
         }
+        #main-navigation .pull-left {
+            display: block;
+            float: left;
+        }
+        #main-navigation .pull-left .outer-menu-item {
+            font-weight: bolder;
+            margin-right: 20px;
+        }
+
+        #main-navigation .pull-right {
+            display: block;
+            float: right;
+        }
+
 
         #content {
-            margin-top: 30px;
-            margin-left: 10px;
-        }
-
-        section {
-            float: left;
-            width: 80%;
-        }
-
-        article {
-            margin-top: 20px;
-        }
-
-        aside {
-            float: right;
-            width: 15%;
-        }
-
-        footer {
+            margin: 30px 10px;
             float: left;
         }
+
+        
+
+        
     </style>
 </head>
 <body>
@@ -89,7 +63,6 @@
                 <h2 class="master-description">한국기술교육직업전문학교</h2>
             </hgroup>
         </header>
-        <hr/>
         <nav id="main-navigation">
             <div class="pull-left">
                 <ul class="outer-menu">
@@ -132,7 +105,6 @@
                 </div>
             </div>
         </nav>
-        <hr/>
         <div id="content">
             <section id="main-section">
                 <article>
