@@ -1,0 +1,200 @@
+<!-- animation 1~4 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 1000px;
+            height: 1000px;
+        }
+        div {
+            width: 500px;
+            height: 500px;
+            float: left;
+            box-sizing: border-box;
+            border: 1px solid gray;
+        }
+
+        div#first {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            /* margin-left: 100px; */
+            position: relative;
+            left: 100px;
+            /* transform: translateX(100px); */
+
+            animation: myAnim 2s infinite ease normal;
+            /* animation-iteration-count: ; */
+            /* animation-timing-function: ; */
+
+        }
+
+        @keyframes myAnim {
+            0% {
+                left: 0px;
+            }
+            25% {
+                left: 100px;
+            }
+            50% {
+                left: 200px;
+            }
+            75% {
+                left: 100px;
+            }
+            100% {
+                left: 0px;
+            }
+        }
+
+        div#second h2 {
+            font-size: 0.5em;
+            margin: 0;
+            padding: 0;
+        }
+        div#second {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: skyblue;
+            box-sizing: border-box;
+            border: 1px solid black;
+            border-radius: 25px;
+            margin-left: 5px;
+            animation: animationName 1s infinite ease-in-out alternate;
+            opacity: 0.2;
+        }
+
+        div#second:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        div#second:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        div#second:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+        div#second:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        div#second:hover {
+            cursor: wait;
+            animation-play-state: running;
+            animation-play-state: paused;
+        }
+
+        @keyframes animationName {
+            0% {
+                margin-top: 0px;
+            }
+            70% {
+                margin-top: 200px;
+                opacity: 0.7;
+            }
+            100% {
+                margin-top: 180px;
+                opacity: 1;
+            }
+        }
+
+        .wrap{
+            border: 1px solid black;
+            width: 500px;
+            height: 300px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .word{
+            border: 1px solid black;
+            width: 80px;
+            height: 20px;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -40px;
+            margin-top: -10px;
+
+            animation: rotate 2s infinite linear alternate;
+        }
+
+        @keyframes rotate {
+            /* 
+                각도를 표현 deg(degree), rad(radians), turn
+            */
+            0% {
+                transform: rotateY(0deg);
+            }
+            50% {
+                /* transform: rotateY(180deg); */
+                transform: rotateY(3.141592rad);
+            }
+        }
+
+        div#fourth h4 {
+            font-size: 0.1em;
+            margin: 0;
+            padding: 0;
+        }
+
+        div.fourth {
+            position: relative;
+        }
+        div#fourth {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            background-color: red;
+            border-radius: 10px;
+            bottom: 0px;
+
+            animation: bounce 2s infinite normal;
+        }
+
+        @keyframes bounce {
+            from, to {
+                bottom: 0px;
+                /* 천천히 끝 */
+                animation-timing-function: ease-out;
+            }
+
+            50% {
+                bottom: 300px;
+                /* 천천히 시작 */
+                animation-timing-function: ease-in;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="first"><h1>first</h1></div>
+    </div>
+    <div>
+        <div id="second"><h2>second</h2></div>
+        <div id="second"><h2>second</h2></div>
+        <div id="second"><h2>second</h2></div>
+        <div id="second"><h2>second</h2></div>
+        <div id="second"><h2>second</h2></div>
+    </div>
+    <div>
+        <div id="third" class="wrap">
+            <div class="word">third</div>
+        </div>
+    </div>
+    <div class="fourth">
+        <div id="fourth"><h4>fourth</h4></div>
+    </div>    
+</body>
+</html>
