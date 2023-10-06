@@ -55,24 +55,25 @@
         }
         .outer-menu-item {
             float: left;
-            position: relative;
         }
         /* inner-menu option 추가 */
         .outer-menu-item:hover .inner-menu{
             display: block;
         }
+        .outer-menu-item:hover {
+            cursor: pointer;
+            color: blue;
+            background-color: #c8c8c8;
+        }
         .inner-menu {
             display: none;
-            width: 100%;
-            position: absolute;
-            background-color: white;
-            text-align: center;
         }
 
         .inner-menu-item > a {
             color: black;
             display: block;
             padding: 5px 10px;
+            width: 960px;
         }
 
         .inner-menu-item > a:hover {
