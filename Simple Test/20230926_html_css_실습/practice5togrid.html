@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<HTML>
+ <HEAD>
+  <TITLE> FLEX </TITLE>
+  <META charset="utf-8">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#wrap {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			width: 96%; height: 820px;
+			margin: auto;
+			border: 1px solid red;
+		}
+
+		header {
+			width: 100%; height: 100px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		#menus{
+			width: 100%; height: 600px;
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-rows: 295px 295px;
+			grid-gap: 10px;
+		}
+
+		#menus div  {
+			background-size: cover;
+		}
+			#menu1 {
+				border: 1px solid black;
+				background: url(실습자료/img/dish1.jpg) no-repeat center;
+			}
+			#menu2 {
+				border: 1px solid black;
+				background: url(실습자료/img/dish2.jpg) no-repeat center;
+			}
+			#menu3 {
+				border: 1px solid black;
+				background: url(실습자료/img/dish3.jpg) no-repeat center;
+			}
+			#menu4 {
+				border: 1px solid black;
+				background: url(실습자료/img/dish4.jpg) no-repeat center;
+			}
+			#menu5 {
+				grid-row: 2;
+				grid-column: 4/2;
+				border: 1px solid black;
+				background: url(실습자료/img/dish5.jpg) no-repeat center;
+			}
+
+		footer {
+			width: 100%; height: 100px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: black;
+			color: white;
+		}
+	</style>	
+</HEAD>
+ <BODY>
+	<div id="wrap">
+		<header>
+			<h1>솔로의 식탁</h1>
+		</header>
+		<article>
+			<div id="menus">
+				<div id="menu1">					
+				</div>
+				<div id="menu2">					
+				</div>
+				<div id="menu3">					
+				</div>
+				<div id="menu4">					
+				</div>
+				<div id="menu5">					
+				</div>
+			</div>
+		</article>
+		<footer>
+			<p>솔로의 식탁</p>
+		</footer>
+	</div>
+ </BODY>
+</HTML>
+<script>
+</script>
