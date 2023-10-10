@@ -1,0 +1,183 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            /* border: 1px solid black; */
+            box-sizing: border-box;
+        }
+        header.intro {
+            width: 100%;
+            height: 1600px;
+            background-image: url("//10.100.205.231/public/강의자료/교육첨부/img/intro/intro_bg.png");
+        }
+        .intro .introWrap {
+            width: 760px;
+            height: 516px;
+            background-image: url("//10.100.205.231/public/강의자료/교육첨부/img/intro/logo.png");
+            position: relative;
+            top: 100px;
+            left: 50%;
+            margin-left: -380px;
+        }
+
+        .intro .introWrap .logo {
+            width: 760px;
+            height: 516px;
+            position: absolute;
+            z-index: 1;
+            background-image: url("//10.100.205.231/public/강의자료/교육첨부/img/intro/logo.png");
+        }
+
+        .intro .introWrap .lion {
+            width: 161px;
+            height: 161px;
+            position: absolute;
+            top: 90px;
+            left: 30px;
+            background-image: url("//10.100.205.231/public/강의자료/교육첨부/img/intro/lion.png");
+            animation: spinLion 1.5s infinite alternate linear;
+        }
+
+        @keyframes spinLion {
+            from {
+                transform: rotate(-10deg);
+            }
+            to {
+                transform: rotate(10deg);
+            }
+        }
+
+        .intro .introWrap .rabbit {
+            width: 105px;
+            height: 129px;
+            position: absolute;
+            margin: 90px 0 0 580px;
+            background-image: url("//10.100.205.231/public/강의자료/교육첨부/img/intro/rabbit.png");
+            animation: spinRabbit 1.5s infinite alternate-reverse linear;
+        }
+
+        @keyframes spinRabbit {
+            from {
+                transform: rotate(-10deg);
+            }
+            to {
+                transform: rotate(10deg);
+            }
+        }
+
+        .intro .introWrap .monkey {
+            width: 85px;
+            height: 93px;
+            position: absolute;
+            z-index: 1;
+            left: 50px;
+            bottom: 120px;
+            background-image: url("//10.100.205.231/public/강의자료/교육첨부/img/intro/monkey.png");
+            animation: spinRabbit 1.5s infinite alternate linear;
+        }
+
+        @keyframes spinRabbit {
+            from {
+                transform: rotate(-10deg);
+            }
+            to {
+                transform: rotate(10deg);
+            }
+        }
+        .intro .introWrap .bear {
+            width: 112px;
+            height: 105px;
+            position: absolute;
+            z-index: 1;
+            bottom: 100px;
+            right: 100px;
+            background-image: url("//10.100.205.231/public/강의자료/교육첨부/img/intro/bear.png");
+            animation: spinRabbit 1.5s infinite alternate linear;
+        }
+        @keyframes spinRabbit {
+            from {
+                transform: rotate(-10deg);
+            }
+            to {
+                transform: rotate(10deg);
+            }
+        }
+
+        .intro .cloudWrap {
+            position: relative;
+            width: 100%;
+            height: 1050px;
+            overflow: hidden;
+        }
+
+        .intro .cloudWrap .leftCloud {
+            position: absolute;
+            background-image: url("//10.100.205.231/public/강의자료/교육첨부/img/intro/cloud1.png");
+            width: 934px;
+            height: 816px;
+            left: 0;
+        }
+
+        .intro .cloudWrap .rightCloud {
+            position: absolute;
+            right: 0;
+            background-image: url("//10.100.205.231/public/강의자료/교육첨부/img/intro/cloud2.png");
+            width: 834px;
+            height: 866px;
+        }
+
+        .intro .cloudWrap .dragonfly {
+            position: absolute;
+            background-image: url("//10.100.205.231/public/강의자료/교육첨부/img/intro/dragonfly.png");
+            top: 800px;
+            width: 336px;
+            height: 228px;
+            left: -336px;
+            animation: dragonfly 5s infinite ease-in-out normal;
+        }
+
+        @keyframes dragonfly {
+            from {
+                left: -336px;
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(25deg);
+            }
+            50% {
+                transform: rotate(-25deg);
+            }
+            to {
+                left: 100%;
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="intro">
+        <div class="introWrap">
+            <div class="logo"></div>
+            <div class="lion"></div>
+            <div class="rabbit"></div>
+            <div class="monkey"></div>
+            <div class="bear"></div>
+        </div>
+        <div class="cloudWrap">
+            <div class="leftCloud"></div>
+            <div class="rightCloud"></div>
+            <div class="dragonfly"></div>
+        </div>
+    </header>
+</body>
+</html>
