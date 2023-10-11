@@ -1,0 +1,3 @@
+sudo apt-get install fcitx-hangul
+
+키보드 입력키 설정은 iBUS가 아닌 fcitx로 설정
