@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let num = parseInt(prompt(`결과를 원하는 정수를 입력하세요!`));
+    let result = 1;
+    for (let i = num; i>0; i--) {
+        if (num !== 1) {
+            result *= i-1;
+        } else {
+            result *= num;
+        }
+    }
+    document.write(`${num}! 의 값은 : ${result}`);
+</script>
+</html>
