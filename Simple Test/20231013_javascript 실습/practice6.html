@@ -9,10 +9,10 @@
     
 </body>
 <script>
-    let num = parseInt(prompt(`결과를 원하는 정수를 입력하세요!`));
-    let result = 1;
+    var num = parseInt(prompt(`결과를 원하는 정수를 입력하세요!`));
+    var result = 1;
     for (let i = num; i>0; i--) {
-        if (num !== 1) {
+        if (i !== 1) {
             result *= i-1;
         } else {
             result *= num;
