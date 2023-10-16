@@ -1,0 +1,130 @@
+<!-- 08_iterator_for.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title>for</title>
+    <script>
+        /*  범위 주석
+
+            반복문 : 프로그램 내에서 연속된 동일한 명령을 일정 횟수만큼
+            반복하여 수행하도록 제어하는 명령문
+
+            종류 : for(반복횟수가 정해져 있는 경우)
+                   while, do while(반복 횟수가 정해져 있지 않은 경우)
+        */
+       //    한줄 주석 ctrl + /
+       // 반복문 - for 문
+       /*
+            for 문 표현 식
+            for(초기화식; 조건식; 증감식){
+                반복수행되는 작업(수행문)
+            }
+
+        1. 초기화식 ex) let i = 0; 최초에 한번만 수행
+        2. 조건식을 비교, 조건식의 결과가 참이면 블럭안의 수행문 실행
+           ex) i < 10;     
+        3. 증감식 수행 ex); i++
+        2 ~ 3반복 수행
+        4. 조건식을 비교, 조건식의 결과가 거짓이면 반복문(for)을 종료
+       */
+      document.write("카운트 : ");
+      // for(var i = 1; i < 10; i++){
+      // for(var i = 1; i < 10; i = i + 1){
+      var i;
+      for(i = 1; i < 10; i = i + 1){
+        document.write(i + " ");
+      }
+      document.write("<br/>");
+      document.write(`출력 완료 - i : ${i} <br/>`);
+
+      for(let j = 1; j <= 6; j++){
+        document.write("<h"+j+">"); // <hj>
+        document.write(j);
+        document.write("</h"+j+">");// </hj>
+      }
+      // {} 내부에 선언된 변수는 {}이 종료되면 사라짐.
+      // {} 내부에서만 사용이 가능하다.
+      // document.write(` j : ${j} <br/>`);
+
+      /*
+        quiz1 - 1에서부터 100까지의 정수의 총합을 구해보시오.
+      */
+      var quiz1 = 0;
+      for (let i=1; i<101; i++) {
+        quiz1 += i;
+
+      }
+
+      /*
+        quiz2 - 사용자에게 2개의 정수를 입력받아 value1 ~ value2까지의 총합을 구하시오.
+      */
+      let value1 = window.prompt("첫번째 정수를 입력하시오.");
+      let value2 = window.prompt("두번째 정수를 입력하시오.");
+      var quiz2 = 0;
+      for (let i = value1; i<=value2; i++) {
+        quiz2 += i;
+      }
+
+      /*
+        quiz. 1 ~ 100까지의 정수 중 3의 배수의 총합을 구하시오.
+      */
+      let total = 0;
+      for(let i=3;i<=100;i+=3){
+        total += i;
+      }
+
+      /*
+        continue 문 - 반복문 내부의 흐름을 제어하는 키워드
+        continue;를 만나면 아래 실행문(수행문)은 실행되지 않고 반복문 실행 흐름으로 돌아간다.
+      */
+
+      total = 0;
+      for(let j = 1; j < 101; j++) {
+        if(j%3 != 0) {
+            continue;
+        }
+        total += 1;
+      }
+
+      /*
+        break문 - 해당 반복문을 완전히 종료한다. (반복문 강제종료)
+        while, do while에서 주로 사용
+        특정 조건에서 작업이 완료되고, 그 이후에 반복을 실행하지 않아도 되는 경우 사용한다.
+      */
+
+      total = 0;
+      for(let j = 1; j <= 1000; j++) {
+        if(j % 3 ==0) {
+            total += j;
+        }
+        if(j > 100) {
+            break;
+        }
+      }
+
+      // 이중 for 문
+      for(let j = 1; j <=5; j++) {
+        for(let k =1; k <=5; k++) {
+            document.write(j+" ");
+        }
+        document.write("<br/>");
+      }
+
+      // quiz. table tag를 이용하여 구구단 표를 그려보자.
+      document.write("<h1>구구단 표</h1>");
+      document.write("<table border=1>");
+        for(let i=2; i<=9; i++) {
+            document.write("<tr>");
+            for(let j=1; j<=9; j++) {
+                document.write(`<td>${i}*${j}=${i*j}</td>`);
+            }
+            document.write("</tr>");
+      }
+      document.write("</table>");
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
