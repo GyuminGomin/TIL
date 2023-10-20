@@ -70,4 +70,9 @@ document.getElementsByName(이름)
 document.getElementsByClassName(클래스)
 document.querySelectorAll(선택자)
 
-<h3></h3>
+<h3>글자 조작</h3>
+
+textContent  
+inlineHTML
+
+<h3>글자 조작</h3>
