@@ -1,0 +1,38 @@
+<!-- 02.dom_calc.html -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title>calculator</title>
+</head>
+<body>
+    <input type="number" id="first" tabindex="1" autofocus/>
+    +
+    <input type="number" id="second" tabindex="2" />
+    <input type="text" id="result" readonly />
+    <input type="button" onclick="result();" value="결과확인" tabindex="3" />
+</body>
+<script>
+    function result() {
+        // alert("click 확인");
+        // id 값이 first인 요소의 value 값과 second인 요소의 value값을 합하여 result인 요소의 value값에 출력
+        let value1 = document.querySelector('#first');
+        let value2 = document.querySelector('#second');
+        let result = document.querySelector('#result');
+        value1 = parseInt(value1.value);
+        value2 = parseInt(value2.value);
+        result.value = value1 + value2;
+    
+        /*
+        let input = document.querySelectorAll("input[type=number]");
+        result.value = 0;
+        for (let i=0;i<input.length; i++) {
+            result.value += parseInt(input[i].value);
+        }
+        console.log(result.value);
+        */
+    }
+
+</script>
+</html>
