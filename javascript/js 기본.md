@@ -58,4 +58,16 @@ var에서 발생할 수 있는 문제 때문에 let, const 선언부가 만들�
 \" 큰 따옴표  
 \\\ 역 슬래시
 
-<h2 id=""></h2>
+<h2 id="">DOM</h2>
+<h3>1개의 문서 객체 선택</h3>
+
+document.getElementById()  
+document.querySelector()
+
+<h3>여러 개의 문서 객체 선택</h3>
+
+document.getElementsByName(이름)
+document.getElementsByClassName(클래스)
+document.querySelectorAll(선택자)
+
+<h3></h3>
