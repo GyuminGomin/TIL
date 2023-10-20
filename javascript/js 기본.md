@@ -75,4 +75,6 @@ document.querySelectorAll(선택자)
 textContent  
 inlineHTML
 
-<h3>글자 조작</h3>
+<h3>시간 조작</h3>
+
+Date  
