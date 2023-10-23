@@ -83,6 +83,28 @@ innerHTML
 innerText  
 - 텍스트 컨텐츠만  
 
+<h3>속성 조작</h3>
+
+문자열 `data-`로 시작하는 사용자 지정 속성은 반드시 속성 조작 메소드를 사용
+setAttribute(속성 이름, 속성 값)  
+getAttribute(속성 이름)  
+ex) document.body.setAttribute('data-custom', 'value');  
+
+dataset (사용자 정의형 속성을 제어할 수 있게 제공 되는 속성)
+ex)  
+```HTML
+    <image src="#" data-pom = "" data-anything = ""/>
+
+    -> 사용
+
+    image.dataset.dataPom = 불라불라
+    image.dataset.dataAnything = 불라불라
+```
+
 <h3>시간 조작</h3>
 
 Date  
+
+date = new Date(); -> 현재 시간
+
+<h3>이벤트 조작</h3>
