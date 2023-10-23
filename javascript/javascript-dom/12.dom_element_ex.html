@@ -1,0 +1,74 @@
+<!-- 12.dom_element_ex.html -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title>To Do List</title>
+    <style>
+        .todos {
+            border: 1px solid skyblue;
+            color: blue;
+            padding: 20px;
+            width: 300px;
+            margin-bottom: 10px;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="toDo" placeholder="할일 작성" />
+    <button onclick="addToDo();">Add Line</button>
+    <!--
+        #todo 입력필드에 작성된 값과 일치하는 할일 목록 삭제
+    -->
+    <button onclick="removeList();">Remove Writed Text Line</button>
+    <br/><br/>
+    <button onclick="removeToDo();">Remove Line</button>
+    
+    <br/>
+    <hr/>
+    <!-- 할일 목록을 저장할 list -->
+    <ul id="toDoList">
+
+    </ul>
+</body>
+<script>
+    // ul#todoList
+    let toDoList = document.getElementById("toDoList");
+    for (let i=0; i < 5; i++) {
+        let li = document.createElement('li');
+        li.innerText = '할일추가-'+i;
+        li.className = 'todos';
+        toDoList.appendChild(li);
+    }
+
+    let toDo = document.getElementById("toDo");
+    function addToDo() {
+        let text = document.createTextNode(toDo.value);
+        console.log(text);
+        let li = document.createElement('li');
+        li.className = 'todos';
+        li.append(text)
+        toDoList.appendChild(li);
+    }
+    // 첫번째 또는 마지막 할일 목록 아이템 제거
+    function removeToDo() {
+        let lastText = toDoList.lastElementChild;
+        if (lastText != null) lastText.remove();
+    }
+    // 입력필드에 작성된 할 일 목록과 일치하는 리스트 아이템 삭제
+    function removeList() {
+        let text = document.createTextNode(toDo.value);
+        let li = document.querySelectorAll("#toDoList>li");
+        for (let item of li) {
+            console.log(item.innerText);
+            if (item.children.innerText == text) {
+                item.remove();
+                break;
+            }
+            // alert("not Find in ToDo List");
+        }
+    }
+</script>
+</html>
