@@ -17,6 +17,9 @@ Compiler, Interpreter : 사람에 가까운 문서로 작성해놓은 언어를 
 ecma 인터내셔널 : 
 cf. ecmaScript == javaScript
 
+
+Browser Object Model 안에 Document Object Model이 들어가 있음 (BOM -> DOM)
+
 <h2 id="javascript">javaScirpt Basic Form</h2>
 
 <h3>표현식과 문장</h3>
