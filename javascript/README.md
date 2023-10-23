@@ -70,13 +70,18 @@ document.querySelector()
 <h3>여러 개의 문서 객체 선택</h3>
 
 document.getElementsByName(이름)
+document.getElementsByTag(태그이름)
 document.getElementsByClassName(클래스)
 document.querySelectorAll(선택자)
 
 <h3>글자 조작</h3>
 
 textContent  
-inlineHTML
+- 일반 글자 형식의 문서 객체 내부 글자
+innerHTML  
+- HTML 형식의 문서 객체 내부 글자  
+innerText  
+- 텍스트 컨텐츠만  
 
 <h3>시간 조작</h3>
 
