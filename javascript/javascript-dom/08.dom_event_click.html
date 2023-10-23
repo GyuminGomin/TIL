@@ -55,6 +55,35 @@
  -->
  <script>
     let radios = document.getElementsByName("r1");
+    console.log(radios);
+
+    let labels = document.getElementsByTagName("label");
+    for(let i=0; i< labels.length; i++) {
+        console.log(radios[i]);
+        console.log(labels[i]);
+        console.log(labels[i].innerText);
+    }
+
+    for(let i in radios) {
+        radios[i].onchange = function() {
+            document.body.style.backgroundColor = labels[i].innerText;
+        }
+        /*
+        radios[i].onclick = function() {
+            document.body.style.backgroundColor = labels[i].innerText;
+        }
+        */
+    }
+
+    for (let item of radios) {
+        console.log(item);
+        item.onclick = function() {
+            let color = item.parentNode.innerText;
+            document.body.style.backgroundColor = color;
+            // document.body.style.backgroundColor = this.id;
+        }
+    }
+    
     
  </script>
 </html>
