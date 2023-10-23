@@ -1,0 +1,60 @@
+<!-- 08.dom_event_click.html -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title>click event</title>
+</head>
+<body>
+    <!-- (label>input:radio[name=r1])*4 -->
+    <!-- <label>
+        <input type="radio" name="r1" id="lightblue" onclick="changeColor('lightblue');">lightblue
+    </label> -->
+    <label>
+        <input type="radio" name="r1" id="lightblue" >lightblue
+    </label>
+    <!-- <label>
+        <input type="radio" name="r1" id="lightgreen" onclick="changeColor(this.id);">lightgreen
+    </label> -->
+    <label>
+        <input type="radio" name="r1" id="lightgreen" >lightgreen
+    </label>
+    <label>
+        <input type="radio" name="r1" id="pink">pink
+    </label>
+    <label>
+        <input type="radio" name="r1" id="orange">orange
+    </label>
+
+</body>
+<!-- 
+<script>
+    function changeColor(color) {
+        document.body.style.backgroundColor = color;
+    }
+    // 브라우저가 모두 출력되고 사용할 준비가 완료되었을 때 실행되는 이벤트 함수
+    window.onload = function() {
+        alert('문서 로드 완료');
+
+        let pink = document.getElementById("pink");
+        pink.onclick = function() {
+            // document.body.style.backgroundColor = "pink";
+            // document.body.style.backgroundColor = pink.id;
+            // console.log(this);
+            // console.log(pink);
+            document.body.style.backgroundColor = this.id;
+        }
+
+        let orangeTag = document.querySelector("#orange");
+        orangeTag.addEventListener('click', function() {
+            document.body.style.backgroundColor = this.id;
+        });
+    }
+</script>
+ -->
+ <script>
+    let radios = document.getElementsByName("r1");
+    
+ </script>
+</html>
