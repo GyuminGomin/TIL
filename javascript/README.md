@@ -108,3 +108,33 @@ Date
 date = new Date(); -> 현재 시간
 
 <h3>이벤트 조작</h3>
+
+- 노드 종류 : TextNode, ElementNode  
+
+부모노드 parentNode;  
+자식노드 childNode; 
+형제노드 nextSibling; previousSibling;  
+위 데이터들은 태그요소만 가져오는 게 아니라 텍스트노드도 가져온다.  
+  
+firstChild; : 모든 요소들 중 첫번째 자식 노드  
+firstElementChild : 모든 태그 요소들 중 첫번쨰 자식 노드  
+lastChild; : 모든 요소들 중 마지막 자식 노드  
+lastElementChild; : 모든 태그 요소들 중 마지막 자식 노드  
+removeChild(노드); : 모든 요소들 중 특정 자식 노드 삭제  
+remove(노드); : 특정 노드 삭제  
+
+- 요소에 컨텐츠 추가 :  
+append(지정한 요소); : 지정된 요소 뒤에 추가인데, 일반 문자열도 가능    
+appendChild(지정한 요소); : 지정된 요소 뒤에 추가인데, 객체만 가능  
+prepend(지정한 요소); : 지정된 요소 앞에 추가  
+
+- 클래스 추가/삭제 :  
+className : 문자열 형태로 클래스 값 가져옴  
+classList : 배열 형태로 클래스 이름 저장되어 있음  
+classList.add() : 클래스 속성 값 추가  
+classList.remove() : 클래스 속성 값 삭제  
+classList.toggle() : 클래스 속성 값 있으면 삭제, 없으면 추가  
+
+
+
+
