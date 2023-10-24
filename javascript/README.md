@@ -135,6 +135,12 @@ classList.add() : 클래스 속성 값 추가
 classList.remove() : 클래스 속성 값 삭제  
 classList.toggle() : 클래스 속성 값 있으면 삭제, 없으면 추가  
 
-
-
-
+- 이벤트 속성 : `eventBubbling` 
+onblur : 포커스를 잃었을 때, 다른 곳으로 이동했을 때  
+onfocus : 포커스를 얻었을 때  
+onfocusin : 포커스 얻었을 때, 이벤트 전파 o (ex.<a href="https://github.com/GyuminGomin/TIL/blob/master/javascript/javascript-dom/13.dom_event_focus_error.html">참고</a>)  
+onfocusout : 포커스를 잃었을 때, 이벤트 전파 o  
+onmouseover : 이벤트 전파 o
+onmouseout : 이벤트 전파 o
+onmouseenter : 이벤트 전파 x
+onmouseleave : 이벤트 전파 x
