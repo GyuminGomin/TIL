@@ -40,35 +40,40 @@
         let li = document.createElement('li');
         li.innerText = '할일추가-'+i;
         li.className = 'todos';
-        toDoList.appendChild(li);
+        toDoList.prepend(li);
     }
 
     let toDo = document.getElementById("toDo");
     function addToDo() {
         let text = document.createTextNode(toDo.value);
-        console.log(text);
         let li = document.createElement('li');
         li.className = 'todos';
         li.append(text)
-        toDoList.appendChild(li);
+        toDoList.prepend(li);
     }
     // 첫번째 또는 마지막 할일 목록 아이템 제거
     function removeToDo() {
         let lastText = toDoList.lastElementChild;
-        if (lastText != null) lastText.remove();
+        if (lastText != null) {
+            lastText.remove();
+            alert("Remove Completed");
+        }
+        else alert("Can't Remove Anymore");
     }
     // 입력필드에 작성된 할 일 목록과 일치하는 리스트 아이템 삭제
     function removeList() {
-        let text = document.createTextNode(toDo.value);
         let li = document.querySelectorAll("#toDoList>li");
+        let flag = false;
         for (let item of li) {
-            console.log(item.innerText);
-            if (item.children.innerText == text) {
+            if (item.innerText == toDo.value) {
                 item.remove();
+                alert("Remove Completed");
+                flag = true;
                 break;
             }
-            // alert("not Find in ToDo List");
         }
+        if (flag === false) alert("Not Found Content");
+        if (flag === true) flag = false;
     }
 </script>
 </html>
