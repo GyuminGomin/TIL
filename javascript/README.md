@@ -69,28 +69,28 @@ document.querySelector()
 
 <h3>여러 개의 문서 객체 선택</h3>
 
-document.getElementsByName(이름)
-document.getElementsByTag(태그이름)
-document.getElementsByClassName(클래스)
-document.querySelectorAll(선택자)
+document.getElementsByName(이름)  
+document.getElementsByTag(태그이름)  
+document.getElementsByClassName(클래스)  
+document.querySelectorAll(선택자)  
 
 <h3>글자 조작</h3>
 
 textContent  
-- 일반 글자 형식의 문서 객체 내부 글자
+- 일반 글자 형식의 문서 객체 내부 글자  
 innerHTML  
-- HTML 형식의 문서 객체 내부 글자  
+- HTML 형식의 문서 객체 내부 글자   
 innerText  
 - 텍스트 컨텐츠만  
 
 <h3>속성 조작</h3>
 
-문자열 `data-`로 시작하는 사용자 지정 속성은 반드시 속성 조작 메소드를 사용
+문자열 `data-`로 시작하는 사용자 지정 속성은 반드시 속성 조작 메소드를 사용  
 setAttribute(속성 이름, 속성 값)  
 getAttribute(속성 이름)  
 ex) document.body.setAttribute('data-custom', 'value');  
 
-dataset (사용자 정의형 속성을 제어할 수 있게 제공 되는 속성)
+dataset (사용자 정의형 속성을 제어할 수 있게 제공 되는 속성)  
 ex)  
 ```HTML
     <image src="#" data-pom = "" data-anything = ""/>
@@ -135,7 +135,7 @@ classList.add() : 클래스 속성 값 추가
 classList.remove() : 클래스 속성 값 삭제  
 classList.toggle() : 클래스 속성 값 있으면 삭제, 없으면 추가  
 
-- 이벤트 속성 : `eventBubbling`  
+- on 이벤트 속성 : `eventBubbling`  
 onblur : 포커스를 잃었을 때, 다른 곳으로 이동했을 때  
 onfocus : 포커스를 얻었을 때  
 onfocusin : 포커스 얻었을 때, 이벤트 전파 o (ex.<a href="https://github.com/GyuminGomin/TIL/blob/master/javascript/javascript-dom/13.dom_event_focus_error.html">참고</a>)  
@@ -144,3 +144,7 @@ onmouseover : 이벤트 전파 o (ex.<a href="https://github.com/GyuminGomin/TIL
 onmouseout : 이벤트 전파 o  
 onmouseenter : 이벤트 전파 x  
 onmouseleave : 이벤트 전파 x  
+
+- 마우스 관련 on이벤트  
+mousedown : 마우스 좌 클릭  
+mouseup : 마우스 좌 클릭 해제  
