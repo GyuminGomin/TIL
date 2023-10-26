@@ -144,7 +144,21 @@ onmouseover : 이벤트 전파 o (ex.<a href="https://github.com/GyuminGomin/TIL
 onmouseout : 이벤트 전파 o  
 onmouseenter : 이벤트 전파 x  
 onmouseleave : 이벤트 전파 x  
+onload : 객체가 다 출력되고 난 뒤, 실행 ex) document.body.onload = () => {}
 
 - 마우스 관련 on이벤트  
-mousedown : 마우스 좌 클릭  
-mouseup : 마우스 좌 클릭 해제  
+    * onmousedown : 마우스 좌 클릭  
+    * onmouseup : 마우스 좌 클릭 해제  
+    * onmousemove : 마우스가 움직일 때  
+        - onmousemove.pageX : x 좌표값 
+        - onmousemove.pageY : y 좌표값
+
+- 옵션 변경
+    * onchange : 변경될 때
+
+- 키 관련 on이벤트  
+
+- default 이벤트 처리  
+oncontextmenu(마우스 우클릭), a태그(페이지 이동), form태그(submit), img태그
+
+## BOM  
