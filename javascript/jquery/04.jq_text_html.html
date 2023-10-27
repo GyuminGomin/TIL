@@ -1,0 +1,41 @@
+<!-- 04.jq_text_html.html -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <!-- div>(h1{h1 - $})*2 -->
+    <div>
+        <h1>h1 - 1</h1>
+        <h1>h1 - 2</h1>
+    </div>
+    <!-- p#target>b -->
+    <p id="target">
+        이것은<b>   하나의 단락</b> 입니다.
+    </p>
+    <!-- button#text{text} -->
+    <button id="text">text</button>
+    <!-- button#html{html} -->
+    <button id="html">html</button>
+</body>
+<script>
+    // text() == textContent
+    $("h1:first-child").text("<a href='#'>text()</a>");
+    // html() == innerHTML
+    $("h1:last-child").html("<a href='#'>html()</a>");
+
+    $("#text").click(() => {
+        let content = $("#target").text();
+        alert(content);
+    })
+
+    $("html").click(() => {
+        let content = $("#target").html();
+        alert(content);
+    })
+</script>
+</html>
