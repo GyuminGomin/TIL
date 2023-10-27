@@ -18,6 +18,13 @@
 	 * A요소를 B요소 내부콘텐츠 앞에 추가
 	 * A.prependTo(B)
 	 */
+	$(document).ready(() => {
+		$("#run").click(() => {
+			let child = $("#parent1>#child");
+			$("#parent2").append(child);
+			// $("#parent2").append($("#parent1>#child"));
+		})
+	})
 </script>
 
 </head>
