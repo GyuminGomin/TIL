@@ -11,6 +11,11 @@
 	 * 
 	 * removeAttr(속성이름) : 지정된 속성 제거
 	 */
+	$(document).ready(() => {
+		$("#run").click(() => {
+			$(".target [type=checkbox]").removeAttr("checked");
+		})
+	})
 
 </script>
 
