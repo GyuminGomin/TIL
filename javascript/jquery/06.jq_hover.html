@@ -1,0 +1,45 @@
+<!-- 06.jq_hover.html -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <!-- h1{Hover - $}*3 -->
+    <h1>Hover - 1</h1>
+    <h1>Hover - 2</h1>
+    <h1>Hover - 3</h1>
+</body>
+<script>
+    // 화살표함수의 this 객체는 최상위 객체인 window를 표시함
+    //                올라온 시점, 벗어난 시점
+    //  $("h1").hover(() => {}, () => {});
+    $("h1").hover(() => {
+        $(this).css({
+            backgroundColor : "gray",
+            color : "white"
+        });
+    }, () => { // 벗어난 시점
+        $(this).css({
+            backgroundColor : "",
+            color : ""
+        });
+    });
+
+    $("h1").hover(function() {
+        $(this).css({
+            backgroundColor : "gray",
+            color : "white"
+        });
+    }, function() { // 벗어난 시점
+        $(this).css({
+            backgroundColor : "",
+            color : ""
+        });
+    });
+
+</script>
+</html>
