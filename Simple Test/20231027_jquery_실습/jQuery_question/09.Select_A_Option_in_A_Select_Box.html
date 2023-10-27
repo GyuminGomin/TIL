@@ -12,6 +12,13 @@
 	 * last() 선택된 요소들 중 마지막 요소
 	 * first() 선택된 요소들 중 첫번째 요소
 	 */
+	$(document).ready(() => {
+		$("#run").click(() => {
+			$("#target select>option").last().prop({
+				selected :'selected'
+			})
+		})
+	})
 
 
 </script>
