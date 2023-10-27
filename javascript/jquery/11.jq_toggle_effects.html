@@ -1,0 +1,49 @@
+<!-- 11.jq_toggle_effects.html -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title>effects</title>
+    <style>
+        .page{
+            border: 1px solid black;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <button>toggle</button>
+    <hr/>
+    <div class="page">
+        <h1>Lorem</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis architecto veritatis rerum dolores autem officia porro consequatur, fugit dolorum eos, unde enim quam labore ea ipsam, rem sint harum dicta!</p>
+    </div>
+    <div>dummy</div>
+</body>
+<script>
+    $(".page").hover(function() {
+        // mouseenter
+        //  400     500         600
+        //  'fast'  'normal'    'slow'
+        // $(this).stop().hide('slow');
+        // $(this).stop().slideUp('slow');
+        $(this).stop().fadeOut('slow');
+
+    }, function() {
+        // mouseleave
+        // $(this).stop().show(600);
+        // $(this).stop().slideDown('slow');
+        $(this).stop().fadeIn('slow');
+    });
+    
+    $("button").click(() => {
+        // slideUp, slideDown 반복
+        $(".page").stop().slideToggle("slow");
+        // show, hide 반복
+        $(".page").stop().toggle("slow");
+        // fadeIn, fadeOut 반복
+        $(".page").stop().fadeToggle("slow");
+    });
+</script>
+</html>
