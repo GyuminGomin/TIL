@@ -1,0 +1,47 @@
+<!-- 03.jq_obj_attr.html -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title>jq_obj</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <img />
+    <img />
+    <img />
+    <div>dummy</div>
+    <!-- div.box*3 -->
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</body>
+<script>
+    /*
+        $("img").attr("src", "\\\\10.100.205.231/public/강의자료/교육첨부/img/pome.png");
+        $("img").attr("width","120");
+    */
+    // JSON - JavaScript Object Notation
+    $("img").attr({
+        alt : '강아지 그림입니다.',
+        src : "\\\\10.100.205.231/public/강의자료/교육첨부/img/poodle.png",
+        width : 120,
+        height : 100
+    });
+
+    /*
+        $(".box").css("width", 100);
+        $(".box").css("height", 100);
+        $(".box").css("background-color", "red");
+    */
+    let obj = {
+        width : 100,
+        height : 100,
+        'background-color' : "red",
+        'margin' : "10px",
+        float : "left"
+    };
+    $(".box").css(obj);
+</script>
+</html>
