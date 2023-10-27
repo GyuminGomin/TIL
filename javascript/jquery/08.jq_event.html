@@ -1,0 +1,58 @@
+<!-- 08.jq_event.html -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <!-- (label>input:radio[name=r1])*3 -->
+    <label>
+        <input type="radio" name="r1" />
+        test1
+    </label>
+    <label>
+        <input type="radio" name="r1" />
+        test2
+    </label>
+    <label>
+        <input type="radio" name="r1" />
+        test3
+    </label>
+
+    <hr/>
+    <input type="password" id="pass"/>
+    <label>
+        <input type="checkbox" id="open" />
+        비밀번호 보기
+    </label>
+</body>
+<script>
+    $("input[type=radio]").on('click',(e) => {
+        console.log(e.key);
+        console.log(e.keyCode);
+        // 요소가 가지고 있는 기본 이벤트 무시
+        e.preventDefault();
+    })
+
+    $("#open").on("change",function() {
+        console.log("changed");
+        /*
+            해당 요소가 : 지정된 속성
+            지정된 속성을 가지고 있는지 확인
+            지정된 속성을 가지고 있으면 true
+        */
+        /*
+        if($(this).is(":checked")) {
+            $("#pass").attr("type","text");
+        } else {
+            $("#pass").attr("type","password");
+        }
+        */
+        let type = $(this).is(":checked") ? "text" : "password";
+        $('#pass').attr("type", type);
+    })
+</script>
+</html>
