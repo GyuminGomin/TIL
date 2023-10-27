@@ -9,6 +9,16 @@
 	 * 기능 : 속성을 disabled 로 변경
 	 * 함수 : attr()
 	 */
+	
+	$(document).ready(() => {
+		$("#run").click(() => {
+			$(".target>button").attr({
+				disabled : "disabled"
+			});
+		});
+	})
+
+	
 </script>
 </head>
 
