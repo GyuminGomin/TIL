@@ -10,6 +10,13 @@
 	 * 기능 : 속성을 readonly로 변경 
 	 * 함수 : attr()
 	 */
+	$(document).ready(() => {
+		$("#run").click(() => {
+			$("#target [type=text]").attr({
+				readonly : 'readonly'
+			})
+		})
+	})
 
 </script>
 
