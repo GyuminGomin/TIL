@@ -12,6 +12,12 @@
 	 * children("선택자") - 자식요소들 중 선택자와 일치하는 요소
 	 * A.remove() - A요소 문서에서 제거
 	 */
+	$(document).ready(() => {
+		$("#run").click(() => {
+			$("#target").children(".child").remove();
+			// $("#target .child").remove();
+		})
+	})
 
 </script>
 
