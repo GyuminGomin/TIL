@@ -12,6 +12,45 @@
 		 * 
 		 * 입력태그.val() - 입력태그 요소가 가지고 있는 value 값
 		 */
+		$(document).ready(() => {
+			$("#btn").on("click", () => {
+				// 입력태그 요소.val(); == 입력태그 요소에 작성된 value값을 읽어온다.
+				// 입력태그 요소.val(문자열);
+				// 입력태그 요소의 value 속성에 값을 '문자열'로 변경한다.
+				let title = $("#title").val();
+				let content = $("#content").val();
+				let owner = $("#owner").val();
+				console.log(title, content, owner);
+				let result = `<tr><td>${title}</td><td>${content}</td><td>${owner}</td></tr>`;
+				console.log(result);
+				$("#table").append(result);
+				$("#title").val("");
+				$("input[type='text']").val(null);
+				$("#title").focus();
+			}) // btn click event
+			// 문서가 로드완료되고 나면 제목 입력태그에 포커스 부여
+			$("#title").focus();
+
+			$("#title").keydown(function(e) {
+				let keyName = e.key;
+				let keyCode = e.keyCode;
+				console.log("keyName",keyName,"keyCode",keyCode);
+				if(keyCode == 13) {
+					$("#content").focus();
+				}
+			});
+			$("#content").keydown(function(e) {
+				if(e.key == 'Enter') {
+					$("#owner").focus();
+				}
+			});
+			$("#owner").keydown(function(e) {
+				if(e.key == 'Enter') {
+					$("#btn").click();
+				}
+			});
+
+		}) // onload event end
 	</script>
 </head>
 <body>

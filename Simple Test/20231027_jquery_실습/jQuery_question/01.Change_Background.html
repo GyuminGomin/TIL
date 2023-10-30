@@ -10,11 +10,16 @@
  * 기능 : background 색상을 yellow로 변경
  * 함수 : css();
  */
-	$(function run(){
+	function run(){
+		// jQuery == $
+		// $("#target")	
+		// jQuery("div#target").css("background-color", "yellow");
+		// {속성:값, 속성:값}
 		$("#target").css({
-			backgroundColor : "yellow"
-		})
-	})
+			backgroundColor : "yellow" ,
+			color : "black"
+		});
+	}
 </script>
 
 </head>

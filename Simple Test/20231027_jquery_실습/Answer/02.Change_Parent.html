@@ -11,11 +11,12 @@
 	 * 기능 : content(text) - span(change me!)를 span(complated) 로 변경 
 	 * 함수 : text()
 	 */
-	$(document).ready(() => {
-		$("#run").click(() => {
-			$("#target>span").text('span(completed)');
+	$(() => { // 문서가 로드된다음에 실행될 함수 정의 가능
+		// $("#run").click(() => {})
+		$("#run").on("click", () => {
+			$("#target > span").text("span(completed)");
 		})
-	})
+	});
 </script>
 
 </head>

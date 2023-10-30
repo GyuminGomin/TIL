@@ -12,7 +12,14 @@
  * :parent : 부모요소인가
  * not(':parent') - 부모요소가 아닌요소 - 자식요소가 없는 요소
  */
-
+	$(document).ready(() => {
+		$("#run").on("click", () => {
+			// $("div.target").not(':parent').remove();
+			// $("div.target:not(:parent)").remove();
+			// $("div.target").not(":has(span)").remove();
+			$("span").parent().remove();
+		})
+	})
 </script>
 
 </head>

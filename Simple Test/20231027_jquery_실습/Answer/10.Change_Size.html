@@ -10,7 +10,14 @@
 	 * 함수 : css() / width(), height()
 	 */
 	$(document).ready(() => {
-		$("#run").click(() => {
+		$("#run").on("click",() => {
+			// $("#target").css({width : 300, height : 300});
+			let width = $("#target").width();
+			console.log(width);
+			let height = $("#target").height();
+			console.log(height);
+			// $("#target").width(500);
+			// $("#target").height(500);
 			$("#target").width(500).height(500);
 		})
 	})

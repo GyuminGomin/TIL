@@ -19,10 +19,9 @@
 	 * A.prependTo(B)
 	 */
 	$(document).ready(() => {
-		$("#run").click(() => {
-			let child = $("#parent1>#child");
-			$("#parent2").append(child);
-			// $("#parent2").append($("#parent1>#child"));
+		$("#run").on("click", () => {
+			// $("#parent2").append($("#parent1 > #child"));
+			$("#parent1 > #child").appendTo($("#parent2"));
 		})
 	})
 </script>

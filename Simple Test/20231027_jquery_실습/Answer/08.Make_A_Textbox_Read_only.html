@@ -11,10 +11,9 @@
 	 * 함수 : attr()
 	 */
 	$(document).ready(() => {
-		$("#run").click(() => {
-			$("#target [type=text]").attr({
-				readonly : 'readonly'
-			})
+		$("#run").on("click", () => {
+			// $("#target input").attr("readonly", true);
+			$("#target input").attr("readonly", "readonly");
 		})
 	})
 

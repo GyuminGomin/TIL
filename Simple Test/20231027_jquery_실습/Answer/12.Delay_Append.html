@@ -9,14 +9,18 @@
 	 * 기능 : 일정 시간 경과 후 문자열 삽입 
 	 * 함수 : setTimeout(), append() or text() or html()
 	 */
-	$(document).ready(() => {
-		$("#btn").click(() => {
-			let text = () => {$("#target").text(str);}
-			setTimeout(text, 500);
-		})
-	})
-	 let str = "<b>문자열</b>";
-
+	let str = "<b>문자열</b>";
+	let run= () => {
+		// setTimeout(지연시간 후 실행될 함수, 지연시간-ms);
+		setTimeout(() => {
+			// $("#target").append(str);
+			// $("#target").text(str);
+			// $("#target").html(str);
+			let content = $("#target").html();
+			str = content + str;
+			$("#target").html(str);
+		}, 2000);
+	}
 	 
 </script>
 
@@ -28,6 +32,6 @@
 		#target<br>
 	</div>
 	<!-- onclick="run()"  -->
-	<input type="button" value="run" id="btn"  />
+	<input type="button" value="run" id="btn" onclick="run()" />
 </body>
 </html>

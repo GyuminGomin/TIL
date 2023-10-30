@@ -11,7 +11,17 @@
  * 
  * 지정된 문자열.replace('a','b') - 지정된 문자열에서 'a', 를 'b'로 변경
  */
-
+	$(document).ready(() => {
+		$("#run").on("click", () => {
+			let content = $("#target").html();
+			console.log(content);
+			let result = content.replace('h2', 'h3');
+			console.log(result);
+			result = content.replaceAll('h2', 'h3');
+			console.log(result);
+			$("#target").html(result);
+		})
+	})
 </script>
 
 </head>

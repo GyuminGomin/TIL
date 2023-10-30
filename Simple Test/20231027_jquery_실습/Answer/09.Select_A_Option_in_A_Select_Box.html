@@ -13,10 +13,9 @@
 	 * first() 선택된 요소들 중 첫번째 요소
 	 */
 	$(document).ready(() => {
-		$("#run").click(() => {
-			$("#target select>option").last().prop({
-				selected :'selected'
-			})
+		$("#run").on("click", () => {
+			// $("#target select option:last-child()").prop("selected", true);
+			$("#target select option").last().attr("selected", true);
 		})
 	})
 

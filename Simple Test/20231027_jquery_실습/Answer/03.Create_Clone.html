@@ -11,9 +11,12 @@
 	 * A.clone() : A tag 요소를 복제하여 요소로 반환
 	 */
 	$(document).ready(() => {
-		$("#run").click(() => {
-			let target = $("#target").clone();
-			$("#target").after(target);
+		$("#run").on("click", () => {
+			// clone이라는 변수에 #target인 요소를 복제하여 저장
+			let clone = $("#target").clone();
+			// 복제한 요소를 #target요소 뒤에 추가
+			
+			$("#target").after(clone);
 		})
 	})
 </script>
