@@ -162,3 +162,19 @@ onload : 객체가 다 출력되고 난 뒤, 실행 ex) document.body.onload = (
 oncontextmenu(마우스 우클릭), a태그(페이지 이동), form태그(submit), img태그
 
 ## BOM  
+
+
+## jQuery
+
+- jQuery site : <a href="https://jquery.com/download/">jQuery Download Site</a>  
+
+> 사용법
+>> $() or jQuery()
+
+\$(document).ready() == windows.onload()   
+
+\$(태그요소).css : css 속성을 변경  
+\$(태그요소).html == innerHtml  
+\$(태그요소).text == textContent  
+\$(태그요소).
+
