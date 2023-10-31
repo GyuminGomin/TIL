@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <style>
+        table {
+            padding: 10px 50px;
+            border: 1px solid black;
+        }
+        table th {
+            font-size: 20px;
+        }
+        table td {
+            text-align: right;
+        }
+        table input {
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th colspan="2">회원가입</th>
+        </tr>
+        <tr>
+            <td>아이디</td>
+            <td><input type="text" id="id" class="inp"></td>
+        </tr>
+        <tr>
+            <td>비밀번호</td>
+            <td><input type="password" class="passwd inp"></td>
+        </tr>
+        <tr>
+            <td>비밀번호확인</td>
+            <td><input type="password" class="passwd inp"></td>
+        </tr>
+        <tr>
+            <td>생년월일</td>
+            <td><input type="text" id="birth" class="inp"></td>
+        </tr>
+        <tr>
+            <td>이름</td>
+            <td><input type="text" id="name" class="inp"></td>
+        </tr>
+        <tr>
+            <td>전화번호</td>
+            <td><input type="text" id="call" class="inp"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align : center"><button type="submit" id="logonBut">회원가입</button> <button type="submit">정보수정</button></td>
+        </tr>
+    </table>
+</body>
+<script>
+    let fun = () => {
+        let flag = false; // 밑의 반복문이 잘 끝나고 나면, 다음 코드 실행
+        for (let i = 0; i<$('input.inp').length+1;i++) { // +1한 이유는 마지막까지 잘 실행이 되었다면, flag를 true로 바꿔주기 위함
+            let search = $('input.inp').eq(i);
+            if (search.prop('value') == "") {
+                if (i==0) {
+                    alert('아이디를 작성해주세요.');
+                    search.focus();
+                    break;
+                }
+                if (i==1) {
+                    alert('비밀번호를 작성해주세요.');
+                    search.focus();
+                    break;
+                }
+                if (i==2) {
+                    alert('비밀번호 확인을 작성해주세요.');
+                    search.focus();
+                    break;
+                }
+                if (i==3) {
+                    alert('생년월일을 작성해주세요.');
+                    search.focus();
+                    break;
+                }
+                if (i==4) {
+                    alert('이름을 작성해주세요.');
+                    search.focus();
+                    break;
+                }
+                if (i==5) {
+                    alert('전화번호를 작성해주세요.');
+                    search.focus();
+                    break;
+                }
+            }
+            if (i==6) flag=true;
+        }
+        console.log(flag);
+        if (flag == true) {
+            if ($('.passwd:first').prop('value') != $('.passwd:last').prop('value')) {
+            alert('비밀번호가 일치하지 않습니다.');
+            $('.passwd:first').focus();
+            $('.passwd:first').prop('value', "");
+            $('.passwd:last').prop('value', "");
+            }
+        };
+    }
+
+    $('#logonBut').on("click", () => {
+        fun();
+    })
+</script>
+</html>
