@@ -128,10 +128,28 @@ apt-cache rdepends [패키지 명] : 이 패키지를 의존하는 패키지 확
 ### 장치 타입
 - IDE
 - SCSI : 서버 및 기업용으로 주로 사용
-- SATA : PC용으로 주로 사용
+    - SCSI 0:0~15(7번 제외) => 15개 * 슬롯 4개 : 총 60개
+    - SCSI 하드디스크 장착시
+        - 물리적 장치 ex) `/dev/sda`, `/dev/sdb` ...
+        - 논리적 장치 ex) `/dev/sda1`, `/dev/sda2` ...
+- SATA : PC용으로 주로 사용 
+    - SATA 0:0~29 => 30개 * 슬롯 4개 : 120개
 - NVMe
 
-
+- 리눅스에서 하드디스크 추가 순서
+    1. 물리적 디스크 장착 (/dev/sdb)
+        - fdisk [물리적장치위치]
+            - n (파티션 분할)
+                - primary > 파티션 번호(1~4) > 시작섹터(enter) > 마지막섹터(enter) > p(설정 확인) > w
+    2. 파티션 설정 (/dev/sdb1)
+        - mkfs.ext4 [논리적장치위치]
+    3. 파일 시스템 생성 (포맷)
+        - mkdir [마운팅될디렉토리명]
+        - mount [논리적장치위치] [마운팅될디렉토리명]
+    4. /etc/fstab에 등록
+        - 재부팅 후에도 마운팅 상태
+        -    `(filesystem) (mount point) (type)  (option)    (dump)  (pass)`
+        - ex) `/dev/sdb1 <>  /mydata  <>   ext4  <>  defaults <>    0   <>    0`
 ## 명령어  
 
 ### 링크  
