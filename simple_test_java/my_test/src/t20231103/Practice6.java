@@ -27,7 +27,8 @@ public class Practice6 {
         short s1 = 100;
         short s2 = 200;
         // short res = s1+s2;
-        int res = (int)s1+s2;
+        // int res = s1+s2;
+        short res = (short)(s1+s2);
         System.out.println(res);
 
         // 9번 문제
