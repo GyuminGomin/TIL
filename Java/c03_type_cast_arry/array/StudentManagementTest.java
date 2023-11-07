@@ -26,6 +26,13 @@ public class StudentManagementTest {
 				4. 분석 - scores 배열에 저장된 점수의 전체총점, 평균점수, 최고점수, 최저점수 출력
 				5. 프로그램 종료
 			 */
+
+			if(selectNo !=1 && selectNo !=5 && scores == null) {
+				System.out.println("학생 수를 먼저 입력해 주세요.");
+//				continue;
+				selectNo = 1;
+			}
+
 			switch (selectNo) {
 				case 1 :
 					System.out.println("학생 수");
