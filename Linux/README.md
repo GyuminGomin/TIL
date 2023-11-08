@@ -150,6 +150,105 @@ apt-cache rdepends [패키지 명] : 이 패키지를 의존하는 패키지 확
         - 재부팅 후에도 마운팅 상태
         -    `(filesystem) (mount point) (type)  (option)    (dump)  (pass)`
         - ex) `/dev/sdb1 <>  /mydata  <>   ext4  <>  defaults <>    0   <>    0`
+
+## RAID 방식 (Redundant Array of Inexpensive(Independent) Disks)
+`서버 컴퓨터 저장장치는 대부분 RAID를 사용한다.`
+- 하드웨어 RAID : 제조업체에서 하드디스크를 연결한 장비를 설치
+    - 안정적이지만 / 고가
+- 소프트웨어 RAID : 운영체제(OS)에서 지원하는 방식
+    - 하드웨어 RAID 보다 덜 안정적이지만 저렴한 비용으로 안전하게 데이터 저장
+
+- RAID Level
+> 단순 볼륨
+
+> Linear RAID : 2개 이상의 하드디스크를 연결만
+
+> RAID 0 : Stripping 
+>> - 여러 개의 디스크를 병렬로 배치하여 사용  
+>> - 100%의 공간효율성, 빠른 속도  
+>> - 결함 허용 안됨 : 데이터의 위험성이 증가, 하나가 고장나면 데이터 손상
+>> - 빠른 성능이 필요하지만, 잃어버려도 문제가 없는 데이터
+
+> RAID 1 : Mirroring
+>> - 여러 개의 디스크에 데이터를 중복하여 기록  
+>> - 하드 디스크의 용량을 절반만 사용 가능  
+>> - 결함 허용 : 하나가 고장이 나더라도 데이터 손상 없음.  
+>> - 데이터 저장에 2배의 용량이 필요, 50% 공간효율성  
+>> - 중요한 데이터를 저장하기에 적합
+
+> RAID 2, 3, 4는 실제 사용하지 않음.
+
+> RAID 5 
+>> - 패리티 비트를 사용해 데이터를 복구 (각 멤버 디스크에 순환 저장)
+>> - 한 디스크가 고장나도 패리티 비트를 통해 저장상태를 유추 + 데이터 사용 가능
+>> - 최소 3개 이상의 디스크가 필요
+>> - 공간 효율성은 (N-1) 
+
+### mdadm으로 Raid 구축 순서
+1. 선처리 작업 (파티션 만들기)
+    - fdisk를 통해 파티션 만들고
+    - type을 Linux raid auto로 준다.
+2. 볼륨 그룹 생성
+    ```
+    $ mdadm --create [생성할 논리 볼륨 (/dev/md9)] --level=[raid 타입 (linear)] --raid-device=[장치 연결 갯수] [논리 디스크 (/dev/sdb1)] [논리 디스크 (/dev/sdc1)] 
+    ->
+    $ mdadm --create /dev/md9 --level=linear --raid-device=2 /dev/sdb1 /dev/sdc1
+    ```
+3. 파일 시스템 포맷  
+    `mkfs.ext4 [논리볼륨]`
+4. 마운트
+    - 연결할 디렉토리 생성
+        - `mkdir /raidLinear` > 폴더 생성
+        - `mount /dev/md9 /raidLinear` > 디바이스 마운트
+5. /etc/fstab에 등록
+    - [장치명] [마운트위치] [타입] [옵션] [dump] [pass]
+    - /dev/md9 /raidLinear ext4 defaults 0 0
+6. /etc/mdadm/mdadm.conf에 등록
+    - mdadm --detail --brief /dev/md0 >> /etc/mdadm/mdadm.conf
+    - mdadm --detail --brief /dev/md1 >> /etc/mdadm/mdadm.conf
+    - mdadm --detail --brief /dev/md9 >> /etc/mdadm/mdadm.conf
+    - mdadm --detail --brief /dev/md5 >> /etc/mdadm/mdadm.conf
+    - update-initramfs -u 명령어로 커널 업그레이드
+    - reboot or init 6
+```
+- 확인용 보조 명령
+    - ls -l /dev/md* : 논리 볼륨 확인
+    - mdadm --detail /dev/md9 : [논리볼륨] 레이드 자세히
+    - df : 마운트 된 디스크 공간 확인
+    - mdadm --detail --scan : Raid 확인
+
+- 기타 명령
+    - mdadm --stop /dev/md9 : [논리볼륨] 장치 중지
+    - mdadm --run /dev/md9 : [논리볼륨] 장치 가동(중지가 되어 있을 때)
+
+- 하드디스크 고장 확인 작업
+    1. cp 명령 사용하여 아무 파일 복사
+        - /raid0, /raid1, /raid5 /raidLinear
+    2. 예시와 같이 하드디스크 제거 후 부팅
+        - ls -l /dev/sd*
+        - df 명령으로 확인
+        - mdadm --detail --scan
+    3. 결함 허용 되는 RAID 재가동
+        - mdadm --run /dev/md1
+        - mdadm --run /dev/md5
+    4. 마운트
+        - mount /dev/md1 /raid1
+        - mount /dev/md5 /raid5
+    5. 파일 확인
+        - ls /raid1
+        - ls /raid5
+    6. 장치 상태 확인
+        - mdadm --detail /dev/md1
+        - mdadm --detail /dev/md5
+- 원상 복구
+    1. 물리적 하드 추가
+    2. fdisk로 파티션 잡기
+    - 결함 허용 RAID
+        - mdadm /dev/md1 --add [새로 생성한 논리볼륨 (/dev/sdc1)]
+    - 결합 허용하지 않는 RAID
+        - mdadm --create로 재생성
+```
+
 ## 명령어  
 
 ### 링크  
