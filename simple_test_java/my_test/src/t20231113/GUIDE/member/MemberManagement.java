@@ -33,10 +33,46 @@ public class MemberManagement{
 	/*
 	 * 기능 관리 
 	 */
-	
+
 	// 프로그램 실행
 	void isRun() {
-		
+		while (isRun) {
+			System.out.println("==================================================");
+			System.out.println("1.회원가입|2.로그인|3.회원목록|4.회원정보수정|5.회원탈퇴|6.프로그램종료");
+			System.out.println("==================================================");
+
+			System.out.println("번호 입력 >");
+			selectNo = sc.nextInt();
+			switch (selectNo) {
+				case 1: // 회원가입
+					System.out.println("회원가입 >");
+					System.out.println("사용정보를 입력해주세요 ----------------------");
+					String id = getData("아이디를 입력해주세요 >");
+					String passwd = getData("비밀번호를 입력 해주세요 >");
+					String checkPasswd = getData("비밀번호를 확인해주세요 >");
+					if (memberIdCheck(id) == false && passwd.equals(checkPasswd)) {
+						System.out.println("이미 사용중이거나 비밀번호가 일치하지 않습니다.");
+						break; // switch break
+					}
+					String name = getData("이름을 입력해주세요 >");
+					
+					for (int i=0; i<members.length; i++) {
+						if (members[i] == null) {
+							members[i] = new Member(i+1, name, id, passwd);
+							break;
+						} else {
+							continue;
+						}
+					}
+					
+				case 2 : // 로그인
+					
+				default:
+					break;
+			}
+
+
+		}
 	}
 	
 	// 프로그램 종료
@@ -74,10 +110,10 @@ public class MemberManagement{
 		for(Member m : members) {
 			if(m != null && m.mId.equals(mId)) {
 				return false;
-			}
-		}		
+			} 
+		}
 		return true;
-	}
+	} // false : id가 같을 때, true : id가 다를 때
 	
 	// 회원 아이디와 비밀번호로 회원 찾기
 	Member findMember(Member m) {
@@ -99,5 +135,18 @@ public class MemberManagement{
 				return;
 			}
 		}
+	}
+
+	Scanner scanLine = new Scanner(System.in);
+	Scanner scanInt = new Scanner(System.in);
+	// 문자 입력
+	String getData(String message) {
+		System.out.println(message);
+		return scanLine.nextLine();
+	}
+	// 숫자 입력
+	int getNum(String message) {
+		System.out.println(message);
+		return scanInt.nextInt();
 	}
 }
