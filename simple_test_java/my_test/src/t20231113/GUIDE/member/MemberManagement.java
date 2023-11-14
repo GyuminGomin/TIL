@@ -115,10 +115,10 @@ public class MemberManagement{
 		System.out.println("== 로그인 ==");
 		String id = getData("아이디를 입력해주세요 >");
 		String passwd = getData("비밀번호를 입력해주세요 >");
-		loginMember = new Member(id,passwd); // 비교 대상
+		loginMember = findMember(new Member(id, passwd)); // 비교 대상
 		if (members[99].equals(loginMember)) {
 			System.out.println("정상적으로 로그인 되었습니다.");
-			System.out.println(members[99]);
+			System.out.println(loginMember);
 			System.out.println("관리자 계정입니다.");
 			return;
 		}
@@ -129,7 +129,7 @@ public class MemberManagement{
 			} else {
 				if (members[i].equals(loginMember)) {
 					System.out.println("정상적으로 로그인 되었습니다.");
-					System.out.println(members[i]);
+					System.out.println(loginMember);
 					break;
 				} else continue;
 			}
@@ -171,6 +171,10 @@ public class MemberManagement{
 				}
 			}
 			int editMemNum = getNum("수정할 회원의 번호를 입력해 주세요.");
+			if (findMember(members[editMemNum-1]) == null ) {
+				System.out.println("멤버가 존재하지 않습니다.");
+				return;
+			}
 			String editMemName = getData("수정할 회원의 이름을 입력해 주세요");
 			members[editMemNum-1].mName = editMemName;
 			System.out.println("수정완료");
@@ -179,12 +183,11 @@ public class MemberManagement{
 			System.out.println("내정보 수정 -----");
 			String chkPasswd = getData("비밀번호를 한번더 입력해주세요 >");
 			String editMemName = getData("수정할 회원의 이름을 입력해 주세요");
-			for (int i=0; i<members.length; i++) {
-				if (loginMember.equals(members[i])) {
-					members[i].mName = editMemName;
-					System.out.println("내정보 수정완료");
-					return;
-				}
+			if (chkPasswd.equals(loginMember.mPw)) {
+				loginMember.mName = editMemName;
+				System.out.println("내 정보 수정완료");
+			} else {
+				System.out.println("잘못된 패스워드를 입력하셨습니다.");
 			}
 		}
 	}
@@ -216,15 +219,15 @@ public class MemberManagement{
 		return true;
 	} // false : id가 같을 때, true : id가 다를 때
 	
-	// // 회원 아이디와 비밀번호로 회원 찾기
-	// Member findMember(Member m) {
-	// 	for(Member member : members) {
-	// 		if(member != null && member.equals(m)) {
-	// 			return member;
-	// 		}
-	// 	}
-	// 	return null;
-	// }
+	// 회원 아이디와 비밀번호로 회원 찾기
+	Member findMember(Member m) {
+		for(Member member : members) {
+			if(member != null && member.equals(m)) {
+				return member;
+			}
+		}
+		return null;
+	}
 	
 	// 회원 정보 삭제
 	void deleteMember() {
