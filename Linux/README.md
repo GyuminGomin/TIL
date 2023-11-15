@@ -601,6 +601,29 @@ apt-cache rdepends [패키지 명] : 이 패키지를 의존하는 패키지 확
 6. 클라이언트에서 접속
     - telnet [서버IP]
 
+## OpenSSH 서버 구축
+`텔넷에서 데이터를 암호화하여 전송하는 보안 프로토콜` (텔넷은 데이터가 해킹당했을 때 그대로 노출되는 경우가 있음)
+
+1. ssh(Secure Shell) 서버 설치
+    - `apt -y install openssh-server`
+2. 서비스 가동
+    - `systemctl restart ssh`
+3. 방화벽 설정 (22번 포트)
+    - `ufw allow 22/tcp`
+4. 클라이언트에서 접속
+    - `ssh [사용자명]@[서버IP]`
+
+## XRDP 서버 구축
+- 텍스트 모드 뿐만 아니라 GUI (x window) 전용 명령어를 사용해야 함
+- 그래픽 모드 원격 관리를 지원하는 XRDP 서버
+1. XRDP 서버 설치
+    - `apt -y install xrdp`
+2. 서비스 시작
+    - `systemctl start xrdp`
+3. 방화벽 설정
+    - `ufw allow 3389/tcp`
+4. 클라이언트에서 접속 (window 서버에서 검색창에 원격 데스크톱 연결을 눌러 접속하면 됨)
+
 ## 명령어  
 
 ### 링크  
