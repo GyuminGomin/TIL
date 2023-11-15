@@ -240,14 +240,366 @@ apt-cache rdepends [패키지 명] : 이 패키지를 의존하는 패키지 확
     6. 장치 상태 확인
         - mdadm --detail /dev/md1
         - mdadm --detail /dev/md5
-- 원상 복구
-    1. 물리적 하드 추가
-    2. fdisk로 파티션 잡기
-    - 결함 허용 RAID
-        - mdadm /dev/md1 --add [새로 생성한 논리볼륨 (/dev/sdc1)]
-    - 결합 허용하지 않는 RAID
-        - mdadm --create로 재생성
 ```
+
+## 
+
+### LVM (Logical Volume Manager)
+
+`여러가지 하드 디스크를 합쳐 한 개의 파티션으로 구성한 뒤 필요에 따라 파티션을 다시 나누는 것`  
+
+- 물리 볼륨 (Physical Volume) : ex. /dev/sda1, /dev/sda2 ...
+- 볼륨 그룹 (Volume Group) : 물리 볼륨을 합쳐서 그룹으로 만든 것 ex. /dev/volumeGroup
+- 논리 볼륨 (Logical Volume) : 볼륨 그룹을 나눈 것 ex. /dev/volumeGroup/lvm1, /dev/volumeGroup/lvm2 ...
+
+### Quota (쿼터)
+`파일 시스템 마다 사용자나 그룹이 생성할 수 있는 파일과 용량 개수 제한`
+- 패키지 : quota
+    - `$ apt -y install quota`
+
+### Shell Scripting Programming
+- Shell : 사용자가 입력한 명령을 해석해 커널로 전달하거나 커널의 처리 결과를 사용자에게 전달하는 것
+    - default shell : bash shell
+- 환경변수
+    - $ echo `$PATHNAME`
+    - 시스템 전체에 사용되는 변수, 셸 스크립트에서 자주 활용
+    - 일반적으로 대문자로 작성
+    - 환경변수 목록 확인 `env`, `printenv`
+    - 선언 : 
+        - ex. `$ name="JIM"` ('=' 얖 옆에 공백이 있으면 안됨) (대소문자 구분)
+        - ex. `$ age=25` (숫자를 넣어도 문자열로 인식)
+        - ex. `$ name="JIM CARRY"` (문자열에 공백이 있을시, ""로 묶어야 함)
+- 셸 스크립트 실행
+    - sh [파일위치/파일명]
+    - 실행 옵션 추가 (chmod +x [파일위치/파일명]) -> ./[파일위치/파일명]
+    ``` shell
+    #! /bin/sh
+    myvar="Hi Ubuntu"
+    echo $myvar # Hi Ubuntu 문자열 출력
+    echo "$myvar" # Hi Ubuntu 문자열 출력
+    echo '$myvar' # $myvar 문자열 출력
+    echo /$myvar # $myvar 문자열 출력
+    exit 0
+    ```
+
+    ``` shell
+    #!/bin/sh
+    echo "Enter your name : "
+    read user_name # user_name이라는 변수에 사용자 입력받기
+    echo "Hello $user_name!"
+    exit 0
+    ```
+
+    ``` shell
+    #!/bin/sh
+    num1=100
+    num2=$num1+200 # 문자열로 취급되어서 계산
+    echo $num2 # 100+200 문자열 출력
+    num3=`expr $num1 + 200` # 띄어쓰기 필수
+    echo $num3 # 300 출력
+    echo $((num1 + num3)) # 400 출력 괄호 두개도 산술식 연산 가능
+    num4=`expr \($num1 + 200\) / 10 \* 2` # 소괄호와 *앞에는 escape문자 사용
+    echo $num4
+    exit 0
+    ```
+
+    ``` shell
+    #!/bin/sh
+    echo "실행 명령어는 <$0> 이다"
+    echo "첫번째 파라미터 : $1"
+    echo "두번째 파라미터 : $2"
+    echo "전체 파라미터 : $*"
+    echo "파라미터 개수 : $#"
+    exit 0
+        ```
+        실행 : $ parameter.sh abc def ghi jk
+        결과 : 실행 명령어는 <parameter.sh> 이다.
+               첫번째 파라미터 : abc
+               두번째 파라미터 : def
+               전체 파라미터 : abc def ghi jk
+               파라미터 개수 : 4
+        ```
+    ```
+
+    ``` shell
+    #!/bin/sh
+    if [ "ubuntu" = "ubuntu" ] # 조건 사이 각 단어에는 공백이 있어야 함 '='이나 '==' 둘다 사용 가능
+    then
+        echo "참입니다."
+    else
+        echo "거짓입니다."
+    fi
+    exit 0
+        ```
+        -n "문자열" : 빈 문자열(null)이 아니면 참
+        -z "문자열" : 빈 문자열(null)이면 참
+        수식1 -eq 수식2 : 두 수식이 같으면 참 (equal)
+        수식1 -ne 수식2 : 두 수식이 다르면 참 (not equal)
+        수식1 -gt 수식2 : 수식1이 수식2보다 크면 참 (greater than)
+        수식1 -ge 수식2 : 수식1이 수식2보다 크거나 같으면 참 (greater than equal)
+        수식1 -lt 수식2 : 수식1이 수식2보다 작으면 참 (less than)
+        수식1 -le 수식2 : 수식1이 수식2보다 작거나 같으면 참 (less than equal)
+        ```
+    ```
+
+    ``` shell
+    #!/bin/sh
+    num1=10 # gt, ge, lt, le, eq, ne 다 사용해보기 위해 수정하면서 풀이하면 됨
+    num2=10
+    if [ $num1 -eq $num2 ]; then
+        echo "두 수식이 같습니다."
+    else
+        echo "두 수식이 다릅니다."
+    fi
+    ```
+
+    ``` shell
+    #!/bin/sh
+    fname=/lib/systemd/system/cron.service
+    if [ -f $fname ]; then
+        head -5 $fname # 파일의 5줄만 실행
+    else
+        echo "cron 서비스가 설치되어있지 않습니다."
+    fi
+
+    fname=/root
+    if [ -d $fname ]; then
+        echo "디렉토리입니다."
+    else
+        echo "디렉토리가 아닙니다."
+    fi
+    exit 0
+
+    fname=/root/name.sh
+    if [ -x $fname ]; then
+        echo "실행가능한 파일입니다."
+    else
+        echo "실행가능한 파일이 아닙니다."
+    fi
+    exit 0
+        ```
+        [ -d 파일명 ] : 파일이 디렉토리면 참
+        [ -e 파일명 ] : 파일이 존재하면 참
+        [ -f 파일명 ] : 파일이 일반파일이면 참
+        [ -x 파일명 ] : 파일이 실행가능이면 참
+        [ -r 파일명 ] : 파일이 읽기가능이면 참
+        [ -w 파일명 ] : 파일이 쓰기가능이면 참
+        [ -s 파일명 ] : 파일이 비어있지 않으면 참
+        ```
+    ```
+
+    ``` shell
+    #!/bin/sh
+    case "$1" in
+        start)
+            echo "시작";;
+        stop)
+            echo "중지";;
+        restart)
+            echo "재시작";;
+        *)
+            echo "잘못된 명령";;
+    esac
+
+    echo "리눅스가 재미있나요? (yes / no)"
+    read answer
+    case $answer in
+        yes | y | Y | YES | Yes )
+            echo "Good";;
+        [nN]* ) # n으로 시작하거나, N으로 시작하는 모든 패턴
+            echo "Bad..";;
+        *)
+            echo "Answer again (yes/no)"
+            exit 1;; # 에러 발생시 종료
+    esac
+    exit 0
+        ```
+        case 변수 in
+            패턴1)
+                # 실행 코드
+                ;;
+            패턴2)
+                # 실행 코드
+                ;;
+            *)
+                # 모든 패턴 일치하지 않을 때 실행 코드
+                ;;
+        esac # case 반대로 뒤집은 것
+        ```
+    ```
+
+    ``` shell
+    #!/bin/sh
+    echo "읽고 싶은 파일을 입력하세요"
+    read fname
+    if [ -f $fname ] && [ -s $fname ]; then
+        head -5 $fname
+    else
+        echo "파일이 없거나, 크기가 0 입니다."
+    fi
+    exit0
+    ```
+
+    ``` shell
+    #!/bin/sh
+    sum=0
+    for i in 1 2 3 4 5 6 7 8 9 10
+    do
+        sum=`expr $sum + $i`
+    done
+    echo "1부터 10까지 합 : $sum"
+
+        ``` bash shell
+            #/bin/bash
+            fruits=("apple" "orange" "banana" "grape")
+            for fruit in ${fruits[@]};
+            do
+                echo "fruit: $fruit"
+            done # 이 문장은 bash로 실행해야 작동함 sh는 안됨...
+        ```
+    for fname in $(ls *.sh) # 현재 디렉토리의 셸 스크립트 수만큼 반복
+    do
+        echo "-----$fname-----" # 파일 이름 출력
+        head -5 $fname # 파일 내용 출력 (5줄만)
+    done
+    exit 0
+        ```
+        for 변수 in 값1 값2 값3 ...
+        do
+            반복할 문장
+        done
+        ```
+    ```
+
+    ``` shell
+    #!/bin/sh
+    while [ 1 ] # 항상 참
+    do
+        echo "반복문 실행"
+    done # 아래 쉘 스크립트랑 따로 만드는 게 best 이거 실행되면 아래가 실행이 안되므로
+
+    sum=0
+    i=1
+    while [ $i -le 10 ] # i <= 10
+    do
+        sum=`expr $sum + $i`
+        i=`expr $i + 1`
+    done
+    echo "1부터 10까지의 합 : $sum"
+
+    while true
+    do
+        read -p "숫자를 입력하세요 (나가려면 exit)"
+        if [ $input == "exit" ]; then
+            break
+        fi
+        echo "입력한 숫자: $input"
+    done
+
+    echo "(b: break, c: continue, e: exit)"
+    while true; do
+        read input
+        case $input in
+        b | B )
+            break;;
+        c | C )
+            echo "while의 조건으로 돌아감"
+            continue;;
+        e | E )
+            echo "exit는 프로그램 완전 종료"
+            exit 1;;
+        esac
+    done
+    echo "break를 눌렀을 때 출력되는 문장"
+    exit 0
+        ```
+        참고
+        until 문
+        - while문과 조건식이 같지만 거짓인 동안만 반복
+        break : 반복문 종료
+        continue : 반복문 조건식으로 돌아감
+        exit : 해당 프로그램 종료
+        ```
+    ```
+
+    ``` shell
+    #!/bin/sh
+    myFunction () {
+        echo "사용자 정의 함수입니다"
+        return
+    } #함수 정의
+    echo "프로그램 시작합니다(함수호출전)"
+    myFunction # 함수 호출
+    echo "프로그램 종료합니다(함수호출후)"
+
+    sum () {
+        echo `expr $1 + $2`
+    }
+    sum 10 20 # 함수를 호출하며 파라미터를 공백분리하여 넘겨줌
+
+    str="ls -l eval.sh"
+    echo $str # 명령문을 화면에 출력
+    eval $str # 명령문을 실행
+    exit 0
+    ```
+    
+    ``` shell 
+    #!/bin/sh (exp1.sh)
+    echo $var1
+    echo $var2
+    exit 0
+
+    #!/bin/sh (exp2.sh)
+    var1="지역변수" # 현재 파일에서만 사용되는 변수
+    export var2="외부변수" # 외부에서도 사용가능한 변수
+    sh exp1.sh # var1과 var2를 출력
+    exit 0
+        ```
+        실행 : sh exp2.sh
+        ->  (공백)
+            외부변수
+        ```
+        ```
+        export
+        외부 변수로 선언
+        현재 셸과 하위 셸에 해당 변수를 공유할 때 사용
+        `export` 키워드로 설정된 변수는 하위 프로세스에서도 사용 가능
+        ```
+    ```
+
+    ``` shell
+    #!/bin/sh
+    echo "오늘 날짜는 $(date)입니다."
+    set $(date)     # date 명령의 결과가 $1, $2 ... 파라미터로 저장
+    echo "오늘은 $4 요일입니다."
+    exit 0
+    ```
+
+## 텔넷 서버 구축하기
+1. 텔넷 서버 설치
+    - apt -y install xinetd telnetd
+2. 설정 파일 편집
+    - /etc/xinetd.d/telnet
+    ```
+    service telnet
+    {
+            disable = no
+            flags = REUSE
+            socket_type = stream
+            wait = no
+            user = root
+            server = /usr/sbin/in.telnetd
+            log_on_failure += USERID
+    }
+    ```
+3. 사용자 생성
+    - adduser
+4. 텔넷 서비스 가동
+    - systemctl run xinetd
+5. 방화벽 설정
+    - ufw allow 23/tcp
+6. 클라이언트에서 접속
+    - telnet [서버IP]
 
 ## 명령어  
 
