@@ -43,6 +43,12 @@ public class MemberManagement{
 			}
 
 			selectNo = sc.nextInt();
+
+			if (loginMember == null && (selectNo == 3 || selectNo == 4 || selectNo == 5)) {
+				System.out.println("로그인 후 사용가능한 메뉴얼 입니다.");
+				selectNo = 2;
+			}
+
 			switch (selectNo) {
 				case 1:
 					System.out.println("== 회원가입 == ");
@@ -80,12 +86,28 @@ public class MemberManagement{
 	}
 
 	private void join() {
+		System.out.println("사용정보를 입력해주세요 --------------------------");
 		System.out.println("아이디를 입력해주세요");
 		String mId = sc.next();
 		System.out.println("비밀번호를 입력해주세요");
 		String mPw = sc.next();
 		System.out.println("비밀번호를 한번 더 입력해주세요");
 		String rePw = sc.next();
+		
+		if(memberIdCheck(mId) && mPw.equals(rePw)) {
+			System.out.println("이름을 입력해주세요 >");
+			String name = sc.next();
+			for (int i =0; i<members.length; i++) {
+				if (members[i] != null) {
+					continue;
+				}
+				members[i] = new Member(i+1, name, mId, mPw);
+				return;
+			}
+		} else {
+			System.out.println("이미 사용중이거나 비밀번호가 일치하지 않습니다.");
+			return;
+		}
 	}
 
 	private void login() {
@@ -93,55 +115,116 @@ public class MemberManagement{
 		String mId = sc.next();
 		System.out.println("비밀번호를 입력해주세요 >");
 		String mPw = sc.next();
-
+		loginMember = findMember(new Member(mId, mPw));
+		if (loginMember == null) {
+			System.out.println("일치하는 멤버가 없습니다.");
+		} else {
+			System.out.println("정상적으로 로그인 되었습니다.");
+			System.out.println(loginMember);
+			if (loginMember == master) {
+				System.out.println("관리자 계정입니다.");
+			}
+		}
 	}
 
 	private void select() {
+		if (loginMember == master) {
+			for (Member m : members) {
+				if (m == null) {
+					break;
+				}
+				System.out.println(m);
+			}
+		} else {
+			System.out.println("관리자만 확인가능한 메뉴입니다.");
+		}
 	}
 	
 
 	private void update() {
 		// 개인회원 - 자기정보(이름) 만 수정 가능
 		// 관리자 - 전체 회원 정보(이름) 수정 가능
-		if (loginMember == null) {
-			System.err.println("로그인 후 사용가능 한 메뉴입니다.");
-			return;
-		}
 
 		if (loginMember.equals(master)) {
 			System.out.println("== 관리자 회원정보 수정");
 			select();
 			System.out.println("수정할 회원 번호를 입력해 주세요.");
 			int mNum = sc.nextInt();
+			if (members[mNum-1] != null) {
+				System.out.println("수정할 회원의 이름을 입력해 주세요 >");
+				String mName = sc.next();
+				members[mNum-1].setmName(mName);
+				System.out.println("수정완료");
+				return;
+			} else {
+				System.out.println("존재하지 않는 회원번호입니다.");
+				return;
+			}
+			
+		} else {
+			System.out.println("내정보 수정 -------------------");
+			System.out.println("비밀번호를 한번더 입력해주세요 >");
+			String mPw = sc.next();
+			if (mPw.equals(loginMember.getmPw())) {
+				System.out.println("수정할 이름을 입력해주세요 >");
+				String mName = sc.next();
+				loginMember.setmName(mName);
+			} else {
+				System.out.println("비밀번호가 잘못입력되었습니다.");
+				return;
+			}
 		}
 	}
 
 	private void delete() {
-		
+		if (loginMember == master) {
+			System.out.println("master 계정은 삭제할 수 없습니다.");
+			return;
+		} else {
+			deleteMember();
+
+		}
 	}
 	
 	// 회원 정보 삭제
 	private void deleteMember() {
-		for(int i=0; i<members.length; i++) {
-			if(members[i].equals(loginMember)) {
-				members[i] = null;
-				loginMember = null;
-				System.out.println("회원탈퇴 완료");
-				return;
+		System.out.println("삭제하시겠습니까? >");
+		char check = sc.next().charAt(0);
+		if (check == 'y' || check == 'Y') {
+			for(int i=0; i<members.length; i++) {
+				if(members[i].equals(loginMember)) {
+					members[i] = null;
+					loginMember = null;
+					System.out.println("회원탈퇴 완료");
+					return;
+				}
 			}
 		}
 	}
 	
 	// 사용자 아이디 중복 체크
 	private boolean memberIdCheck(String mId) {
-		return true;
+		for (int i =0; i<members.length; i++) {
+			if (members[i] == null) {
+				break;
+			}
+			if (mId.equals(members[i].getmId())) {
+				return false; // id 존재
+			}
+		}
+		return true; // id 존재하지 않음
 	}
 	
 	// 회원 아이디와 비밀번호로 회원 찾기
 	private Member findMember(Member m) {
+		if (master.equals(m)) {
+			return master;
+		} // 맨마지막에 있는 것 가져오기
 		for(Member member : members) {
 			if(member != null && member.equals(m)) {
 				return member;
+			} else {
+				break; // null인 값 반복하지 않게
 			}
 		}
 		return null;
