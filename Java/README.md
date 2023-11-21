@@ -58,3 +58,21 @@
 <a href="./c06_access_modifier/singleton">싱글톤 패턴 참고</a>
 
 
+
+## Object 클래스
+### toString
+<a href="./c09_API_class/a_object/toString">toString 예제</a>
+
+### 객체 해시코드
+Object에서 반환하는 해시코드는 주소를 정수로 변환해서 반환
+<a href="./c09_API_class/a_object/hashcode">해시코드 예제</a>
+
+### 얕은복사와 깊은복사
+<a href="./c09_API_class/a_object/clone">얕은복사와 깊은복사 예제</a>
+
+### 소멸자 finalize
+<a href="./c09_API_class/a_object/finalize">finalize 예제</a>
+
+### Object final
+클래스 설계정보를 저장하고 있는 클래스의 클래스 : getClass
+- 멀티스레드 하면서 나중에 notify, wait 알아볼것
