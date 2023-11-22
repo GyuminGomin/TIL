@@ -78,17 +78,21 @@ apt-cache rdepends [패키지 명] : 이 패키지를 의존하는 패키지 확
     - xz [파일명] : 파일 압축 (기존 파일 삭제)
     - xz -d [파일명.xz] : 압축 해제 (압축파일 삭제)
     - xz -k [파일명] : 파일 압축 (기존 파일 유지)
+<image src="./ImageFolder/xz.png">
 - bzip2
     - bzip2 [파일명] : 파일 압축 (기존 파일 삭제)
     - bzip2 -d [파일명.bz2] : 압축 해제 (압축파일 삭제)
     - bzip2 -k [파일명] : 파일 압축 (기존 파일 유지)
+<image src="./ImageFolder/bzip2.png">
 - gzip
     - gzip [파일명] : 파일 압축 (기존 파일 삭제)
     - gzip -d [파일명.gz] : 압축 해제 (압축파일 삭제)
     - gzip -k [파일명] : 파일 압축 (기존 파일 유지)
+<image src="./ImageFolder/gzip.png">
 - zip
     - zip [생성될파일명.zip] [파일명] : 파일 압축 (기존 파일 유지)
     - unzip [파일명.zip] : 압축 해제 (압축파일 유지)
+<image src="./ImageFolder/zip.png">
 ### 묶기
 - tar : 파일 묶기 (리눅스에선 원칙적으로 '파일 묶기'와 '파일 압축'이 별개로 실행)  
     <strong>[동작]</strong>
@@ -242,7 +246,7 @@ apt-cache rdepends [패키지 명] : 이 패키지를 의존하는 패키지 확
         - mdadm --detail /dev/md5
 ```
 
-## 
+## HardWare
 
 ### LVM (Logical Volume Manager)
 
@@ -624,6 +628,261 @@ apt-cache rdepends [패키지 명] : 이 패키지를 의존하는 패키지 확
     - `ufw allow 3389/tcp`
 4. 클라이언트에서 접속 (window 서버에서 검색창에 원격 데스크톱 연결을 눌러 접속하면 됨)
 
+## 네임서버 IP 주소를 얻는 흐름
+1. URL 입력 (요청)
+2. /etc/hosts.conf 에서 순서를 조회
+3. /etc/hosts 에서 매칭된 IP가 있는지 조회
+    3-1. (성공) IP 반환
+4. (실패) /etc/resolv.conf 에서 네임서버 조회  
+    4-1. (실패) 네임서버 설정이 없음 -> 알 수 없음  
+    4-2. (성공) 네임서버에 질의
+5. 질의(쿼리) : 루트 -> TDL -> ... -> 로컬  
+    5-1. (실패) 도메인 호스트 알 수 없음.  
+    5-2. (성공) 응답
+6. IP 주소 획득
+<img src="./ImageFolder/nameserverip.png">
+
+## 캐싱 전용 네임서버 설치
+1. 패키지 설치
+    - $ `apt -y install bind9 bind9utils`
+2. 파일 수정
+    - $ `/etc/bind/named.conf.options`
+        - dnssec-validation auto; -> no;
+        - recursion yes;
+        - allow-query { any; };
+3. 데몬 재시작
+    - $ `systemctl restart named`
+4. 방화벽(53번 포트) 열기
+    - $ `ufw allow 53`
+
+## 네임서버 확인하기
+- $ `nslookup`
+    - \> server [IP주소]
+    - \> 도메인 주소
+- DNS 변경
+    ```
+    - $ nano /etc/resolv.conf
+    - nameserver [DNS서버주소]
+    ```   
+- 브라우저에서 확인
+
+- 윈도우 환경
+    - [제어판] > 네트워크 및 인터넷 > 네트워크 상태 및 작업 보기 > Ethernet0 > Eternet상태 > 속성 > [인터넷 프로토콜 버전(TCP/IPv4)] > 속성 > DNS 서버 주소 > 입력
+    - cmd 창에서 `ipconfig -all`로 확인
+    - cmd 창에서 `netsh interface ip set dns [네트워크장치이름:Ethernet0] static [DNS서버IP]` 명령어로 변경
+
+## 마스터 네임 서버
+- 네임 서버 구성
+    - 임의의 도메인(john.com)을 내부망에서 사용
+    - 웹서버 (apache2)
+        - www.john.com => 웹서버
+    - ftp서버 (vsftpd)
+        - ftp.john.com => FTP 서버
+- 웹 서버 설치
+    - 아파치 서버 설치
+        - $ `apt -y install apache2`
+    - HTTP 프로토콜 방화벽 열기
+        - $ `ufw allow 80`
+    - 웹페이지 편집
+        - $ `nano /var/www/html/index.html`
+    - 데몬 재시작
+        - $ `systemctl restart apache2`
+- 파일전송 서버 설치
+    - FTP 서버 설치
+        - $ `apt -y install vsftpd`
+    - ftp 프로토콜 방화벽 열기
+        - $ `ufw allow 21`
+    - 전송 파일 편집
+        - $ `nano /srv/ftp/welcom.msg`
+    - 익명 접속 허용
+        - $ `nano -c /etc/vsftpd.conf`
+            - anonymous-enable=YES로 수정
+    - 데몬 재시작
+        - $ `systemctl restart vsftpd`
+- 네임 서버 도메인 설정
+    - /etc/bind/named.conf 편집
+    ```
+    zone "john.com" IN {
+        type master;
+        file "/etc/bind/john.com.db";
+    };
+    ```
+    - /etc/bind/john.com.db 편집
+    ```
+    $TTL    3H
+    @       IN      SOA     @       root.   ( 2 1D 1H 1W 1H )
+
+    @       IN      NS      @
+            IN      A       192.168.111.100
+
+    www     IN      A       192.168.111.100
+    ftp     IN      A       192.168.111.200
+    ```
+    - 포워드 존 파일
+        - 주석 : ;(세미콜론)
+        - $ TTL : Time To Live : 다른 네임서버 쿼리 질의 시간
+        - @ : named.conf에 저장된 도메인(john.com)
+        - IN : 인터넷
+        - A : IP 주소
+        - SOA : Start Of Authority (권한 범위 시작 : 버전정보, 요청간격, 재접속간격, 정보파기간격, 삭제)
+- 파일 문법 확인
+    - `$ named-checkconf`
+    - `$ named-checkzone [도메인이름] [설정파일이름]`
+        - `$ named-checkzone john.com /etc/bind/john.com.db` : 문제가 없으면 OK
+    - 시스템 재시작
+        - `$ systemctl restart bind9`
+        - `$ systemctl restart named`
+- 외부에서 접속 확인
+    - (웹서버) 브라우저로 www.john.com 접속
+    - (FTP) `$ ftp ftp.john.com` -> 사용자명 anonymous 비밀번호 없음
+
+<img src="./ImageFolder/nameserver.png">
+
+
+## 라운드 로빈 방식의 네임 서버
+- 웹 클라이언트가 서비스를 요청할 경우 교대로 서비스를 실행
+- 부하 분산 : 균등하게 서버 부하를 나눈다.
+
+> ex
+
+    ```
+       - $ nano /etc/bind/john.com.db
+    www         IN  CNAME   webserver.john.com
+    webserver   100 IN  A   1.1.1.1
+                200 IN  A   2.2.2.2
+                300 IN  A   3.3.3.3
+    
+    -> www.john.com으로 요청이 들어올 경우 번갈아가며 등록된 ip를 반환
+        - 100, 200, 300은 단순한 순서 (RoundRobin)
+
+    $ systemctl restart named
+    www.john.com 접속 확인 (브라우저 종료 후 재시작)
+    ```
+
+## 메일 서버
+- 이메일 송수신에 사용되는 프로토콜
+    1. SMTP(Simple Mail Transfer Protocol)
+        - 송신때 사용 또는 메일서버끼리 전송, 25번 포트
+    2. POP3(Post Office Protocol)
+        - 메일서버에서 수신때 사용 (클라이언트에서 다운로드하면 메일 삭제 - 단일 기기에서만 사용, 110,995(암호화)번 포트)
+    3. IMAP(Inter Mail Access Protocol)
+        - 메일서버에서 수신때 사용 (메일서버에서 저장 - 여러기기간 동기화 가능, 143,993(암호화)번 포트)
+### (메일 서버 구현) - 참고
+
+- NameServer 설정
+    1. 패키지 설치
+        - `$ apt -y install bind9 bind9utils`
+    2. 파일 수정
+        - $ `/etc/bind/named.conf.options`
+        - dnssec-validation auto; -> no;
+        - recursion yes;
+        - allow-query { any; };
+    3. 데몬 재시작
+        - $ `systemctl restart named`
+    4. 방화벽(53번 포트) 열기
+        - $ `ufw allow 53`
+- Server : mail.naver.com
+    1. 메일 서버 설치
+        - `$ apt -y install sendmail`
+    2. /etc/hostname
+        - `mail.naver.com`
+    3. /etc/hosts
+        - `192.168.111.100 mail.naver.com`
+    4. /etc/mail/local-host-names
+        - `mail.naver.com`
+- Server B : mail.daum.net
+    1. 메일 서버 설치
+        - `$ apt -y install sendmail`
+    2. /etc/hostname
+        - `mail.daum.net`
+    3. /etc/hosts
+        - `192.168.111.200 mail.daum.net`
+    4. /etc/mail/local-host-names
+        - `mail.daum.net`
+- 도메인 파일 Zone 설정
+```
+- /etc/bind/named.conf
+zone "naver.com" IN {
+        type master;
+        file "/etc/bind/naver.com.db";
+};
+
+zone "daum.net" IN {
+        type master;
+        file "/etc/bind/daum.net.db";
+};
+
+- /etc/bind/naver.com.db
+$TTL    3H
+@       IN      SOA     @       root.   ( 2 1D 1H 1W 1H )
+
+@       IN      NS      @
+        IN      A       192.168.111.100
+        IN      MX      10      mail.naver.com.
+
+mail    IN      A       192.168.111.100
+
+- /etc/bind/daum.net.db
+$TTL    3H
+@       IN      SOA     @       root.   ( 2 1D 1H 1W 1H )
+
+@       IN      NS      @
+        IN      A       192.168.111.200
+        IN      MX      10      mail.daum.net.
+
+mail    IN      A       192.168.111.200
+```
+- 파일 문법 확인
+
+- 메일 서버 구축
+    1. dovecot 패키지 설치
+        - `apt -y install dovecot-pop3d`
+        - `systemctl restart sendmail`
+        - `systemctl restart dovecot`
+        - `ufw disable` -> 비추천(포트가 워낙 많아 그냥 해제함)
+    2. 설정파일 수정 
+        - `nano -c /etc/mail/sendmail.cf`
+    - 98행쯤 수정 
+        - (수정전) Cwlocalhost
+        - (수정후) Cwnaver.com(붙여서 쓸 것)
+    - 269행쯤 수정:
+        - (삭제) ,Addr=127.0.0.1 부분 삭제
+        - (수정전) 0 DaemonPortOptions=Faminy=inet, Name=MTA-v4, Port=smtp, Addr=127.0.0.1
+        - (수정후) 0 DaemonPortOptions=Faminy=inet, Name=MTA-v4, Port=smtp
+    - 270행쯤 수정:
+        - (삭제) ,Addr=127.0.0.1 부분 삭제
+        - (수정전) 0 DaemonPortOptions=Faminy=inet, Name=MTA-v4, Port=submission, M=Ea, Addr=127.0.0.1
+        - (수정후) 0 DaemonPortOptions=Faminy=inet, Name=MTA-v4, Port=submission, M=Ea
+
+- 3. 액세스 파일 최하단부 내용추가 
+    - `nano -c /etc/mail/access`  
+        naver.com    RELAY  
+        daum.net     RELAY  
+        192.168.111  RELAY
+
+- 4. 액세스파일 등록 
+    - `makemap hash /etc/mail/access < /etc/mail/access`
+
+- 5. 설정 수정 
+    - `nano -c /etc/dovecot/dovecot.conf` 
+        - 30행쯤 주석(#) 제거: listen = *, : :
+        - 33행쯤 주석(#) 제거: base_dir = /var/run/dovecot/
+        - 34행쯤 추가: disable_plaintext_auth = no
+
+- 6. 설정 수정 
+    - `nano -c /etc/dovecot/conf.d/10-mail.conf`
+        - 121 행쯤 주석(#) 제거 후 변경:  
+            mail_access_groups = mail
+        - 166행쯤 주석(#) 제거:  
+            lock_method = fcntl
+
+- 7. 회원 추가 
+    - `adduser lee`
+
+- 8. 클라이언트 메일 주고받기
+    - Client : (쿠분투) evolution
+    - WinClient : (윈도우) 오페라 메일
+    
 ## 명령어  
 
 ### 링크  
