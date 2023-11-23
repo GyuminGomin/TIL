@@ -84,3 +84,7 @@ Object에서 반환하는 해시코드는 주소를 정수로 변환해서 반�
 기본적으로 JVM은 UTF - 16 으로 해석 ( 16비트 - 2바이트) 변환
 그래서 char인 2바이트로 한국어 표현 가능
 
+### String Class
+<a href="./c09_API_class/b_string">String Class</a>
+
+### Wrapper Class
