@@ -7,9 +7,10 @@ public class GenericMethod {
 	/*
 	 * printArray method 정의 
 	 */
-	public static <T[]> printArray<T[]>(T[] t) {
-		
-		return T[];
+	public static <T> void printArray(T[] t) {
+		for (T value : t) {
+			System.out.print(value + " ");
+		}System.out.println();
 	}
 
 

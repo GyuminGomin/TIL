@@ -1,4 +1,4 @@
-package generic.exam05;
+package simple_test_java.my_test.src.t20231127.exam05;
 
 public class RunClass {
 
