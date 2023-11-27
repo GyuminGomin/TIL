@@ -1,4 +1,4 @@
-package generic.exam03;
+package simple_test_java.my_test.src.t20231127.exam03;
 
 import java.util.Arrays;
 
@@ -6,9 +6,13 @@ public class GenericMethod {
 
 	/*
 	 * printArray method 정의 
-	 * 
 	 */
-	
+	public static <T[]> printArray<T[]>(T[] t) {
+		
+		return T[];
+	}
+
+
 	public static void main(String[] args) {
 		Integer[] iArray = {10,20,30,40,50};
 		Double[] dArray = {1.1, 1.2, 1.3, 1.4, 1.5};

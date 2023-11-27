@@ -1,5 +1,27 @@
 package Java.c11_generic.generic02_multi;
 
-public class Twin {
-    
+public class Twin<T, M> {
+	
+	private T kind;
+	private M model;
+	
+	public T getKind() {
+		return kind;
+	}
+	public void setKind(T kind) {
+		this.kind = kind;
+	}
+	public M getModel() {
+		return model;
+	}
+	public void setModel(M model) {
+		this.model = model;
+	}
+	
+	@Override
+	public String toString() {
+		return "Twin [kind=" + kind + ", model=" + model + "]";
+	}
+	
+	
 }

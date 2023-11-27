@@ -1,4 +1,4 @@
-package generic.exam01;
+package simple_test_java.my_test.src.t20231127.exam01;
 
 public class ContainerExample {
 	
