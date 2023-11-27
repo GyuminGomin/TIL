@@ -1,6 +1,5 @@
 package simple_test_java.my_test.src.t20231124;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class practice4 {
