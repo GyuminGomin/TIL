@@ -11,10 +11,10 @@ public class practice5 {
         String[] score = scores.split(",");
         
         for (String s : score) {
-            int sco = Integer.valueOf(s);
+            int sco = Integer.valueOf(s); // valueOf는 객체타입 반환, parse는 기본타입 반환
             total += sco;
         }
-        avg = total/score.length;
+        avg = (double)total/score.length;
 
         System.out.println(scores);
         System.out.println("총점: " + total + "점");
