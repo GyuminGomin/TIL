@@ -92,3 +92,5 @@
 6. mysql 데몬 재시작
 
 ### Host OS에서 접속하기
+<a href="https://blog.naver.com/ool9898/223278111964">VMWare에 설치된 MySQL서버 HostOS에서 실행</a>
+---
