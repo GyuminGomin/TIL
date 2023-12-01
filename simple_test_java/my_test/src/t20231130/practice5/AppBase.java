@@ -1,4 +1,4 @@
-package guide;
+package simple_test_java.my_test.src.t20231130.practice5;
 
 import java.util.ArrayList;
 import java.util.Objects;
