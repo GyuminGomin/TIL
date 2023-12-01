@@ -5,6 +5,7 @@ package simple_test_java.my_test.src.t20231130.practice2_answer;
  */
 public class Nation {
 	
+
 	/**
 	 * 국가 이름
 	 */
@@ -28,4 +29,19 @@ public class Nation {
 	public String getCapital() {
 		return capital;
 	}
+
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Nation) {
+			Nation n = (Nation)obj;
+			// 저장된 국가 이름이 동일하면 동등한 객체로 확인하도록 재정의
+			if(this.country.equals(n.getCountry())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	
 }

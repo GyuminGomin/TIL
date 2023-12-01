@@ -85,9 +85,9 @@ public class Member {
 	public boolean equals(Object o) {
 		if (o instanceof Member) {
 			Member m = (Member)o;
-		}
-		if (this.mId.equals(m.mId) && this.mPw.equals(m.mPw)) {
-			return true;
+			if (this.mId != null && this.mId.equals(m.mId) && this.mPw.equals(m.mPw)) {
+				return true;
+			}
 		}
 		return false;
 	}
