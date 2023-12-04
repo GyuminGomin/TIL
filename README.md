@@ -3,10 +3,16 @@
 <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=GyuminGomin&layout=compact">
 
 
-## <a href="https://github.com/GyuminGomin/TIL/tree/master/html">📕HTML</a>  
+## <a href="./html/">📕HTML</a>  
 
-## <a href="">📕📔📗📘📙📚📒CSS</a>  
+## <a href="./css/">📔CSS</a>  
 
-## <a href="">📕📔📗📘📙📚📒CSS</a>  
+## <a href="./javascript/">📗JAVASCRIPT</a>  
 
-## <a href="https://github.com/GyuminGomin/Network">📚Network</a>
+## <a href="./Java/">📘JAVA</a>  
+
+## <a href="./Linux/">📙LINUX</a>  
+
+## <a href="./DBMS/">📚DBMS</a>  
+
+## <a href="#">📒</a>  
