@@ -22,7 +22,7 @@ public class ObjectStreamExample {
 			oos.writeObject(Integer.valueOf(85));
 			oos.writeObject(3.14); // 자동 boxing
 			oos.writeObject(new int[] {1,2,3,4});
-			oos.writeObject(new String("최기근"));
+			oos.writeObject(new String("김규민"));
 			
 			oos.writeObject(97);
 			oos.writeObject(Double.valueOf("3.141592"));
