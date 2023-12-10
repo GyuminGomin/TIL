@@ -26,7 +26,7 @@ public class ClassExample {
 		
 		try {
 			// 3. class의 이름 정보를 이용하여 설계 정보 획득
-			Class<Person> pClass3 = (Class<Person>)Class.forName("ex04_class.Person");
+			Class<Person> pClass3 = (Class<Person>)Class.forName("Java.c14_nested_class_lambda.ex04_class.Person");
 			
 			System.out.println(pClass3.getName()); 				// 풀 네임
 			System.out.println(pClass3.getSimpleName()); 		// class 이름
@@ -85,7 +85,7 @@ public class ClassExample {
 			}
 			
 			System.err.println("Class를 이용하여 instance 생성");
-			Class<Person> clazz = (Class<Person>)Class.forName("ex04_class.Person");
+			Class<Person> clazz = (Class<Person>)Class.forName("Java.c14_nested_class_lambda.ex04_class.Person");
 			// deprecated sin version 9
 			// 어떤 기능이 아직 까지 사용되고는 있지만, 
 			// 새로운 기능이 나왔기 때문에 조만간 사라지게 될 상태이며 사용을 권장하지 않음.
