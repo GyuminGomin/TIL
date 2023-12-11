@@ -7,10 +7,10 @@ public class BeepThread extends Thread{
 
 	@Override
 	public void run() {
-		Toolkit tool = Toolkit.getDefaultToolkit();
+		Toolkit tool = Toolkit.getDefaultToolkit(); // 운영체제의 시스템 정보
 		for(int i = 0; i < 5; i++) {
 			System.out.println("BeepThread");
-			tool.beep();
+			tool.beep(); // 비프음을 의미함. 띵소리
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {}
