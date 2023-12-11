@@ -78,9 +78,11 @@ Object에서 반환하는 해시코드는 주소를 정수로 변환해서 반�
 - 멀티스레드 하면서 나중에 notify, wait 알아볼것
 
 
-## UTF - 8
+## API Class
+
+### UTF - 8 (참고)
 가변형 4바이트로 문자 표현
-한국어는 3바이트지만
+`한국어는 3바이트`지만
 기본적으로 JVM은 UTF - 16 으로 해석 ( 16비트 - 2바이트) 변환
 그래서 char인 2바이트로 한국어 표현 가능
 
@@ -88,3 +90,20 @@ Object에서 반환하는 해시코드는 주소를 정수로 변환해서 반�
 <a href="./c09_API_class/b_string">String Class</a>
 
 ### Wrapper Class
+<a href="./c09_API_class/c_wrapper">Wrapper Class</a>
+
+
+## 예외처리
+
+## 제네릭
+
+## 컬렉션 프레임워크
+
+## 중첩 클래스
+
+## 멀티쓰레드
+
+## Network
+
+### 자바로 만든 채팅 앱 (내부 네트워크 망 사용)
+<a href="./c16_network/n3_chat">채팅 앱(IP 변경 필수)</a>
