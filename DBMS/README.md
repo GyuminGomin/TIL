@@ -94,3 +94,119 @@
 ### Host OS에서 접속하기
 <a href="https://blog.naver.com/ool9898/223278111964">VMWare에 설치된 MySQL서버 HostOS에서 실행</a>
 ---
+
+## SQL 명령어의 범주
+
+1. DDL (데이터 정의 언어 : Data Definition Language)
+    - 데이터의 구조를 정의하고 조작하는데 사용
+    - CREATE, ALTER, DROP, TRUNCATE 등
+    - 커밋이 포함되어 있음 (AutoCommit이 꺼져있더라도 수행이 됨)
+    ``` sql
+    -- 테이블 생성
+    CREATE TABLE 테이블명 (열1, 데이터타입1...);
+    -- 테이블 수정
+    ALTER TABLE 테이블명 ADD COLUMN 새로운 열 데이터타입;
+    -- 테이블 삭제
+    DROP TABLE 테이블명;
+    -- 테이블 구조 유지하면서 데이터 삭제
+    TRUNCATE TABLE 테이블명;
+    ```
+
+2. DML (데이터 조작 언어 : Data Manipulation Language)
+    - 데이터를 조작하는 데 사용
+    - INSERT, UPDATE, DELETE (SELECT를 넣는 분류도 있음)
+    - 트랜잭션이 발생함.
+    ``` sql
+    -- 데이터 삽입
+    INSERT INTO 데이터베이스.테이블명 (열1, 열2, ...) VALUES (값1, 값2, ...);
+    -- 데이터 수정
+    UPDATE 데이터베이스.테이블명 SET 열1=값1 WHERE 조건식;
+    -- 데이터 삭제
+    DELETE FROM 데이터베이스.테이블명 WHERE 조건식; 
+    ```
+
+3. DQL (데이터 조회 언어 : Data Query Language)
+    - 데이터를 조회하는 데 사용
+    - SELECT
+
+4. TCL (트랜잭션 제어 언어 : Transaction Control Language)
+    - COMMIT, ROLLBACK, SAVEPOINT
+    ``` sql
+    -- 트랜잭션 완료
+    COMMIT;
+    -- 트랜잭션 취소(되돌리기)
+    ROLLBACK;
+    -- 일부데이터만 롤백가능하게 SAVEPOINT 설정
+    SAVEPOINT 포인트명;
+    ```
+
+5. DCL (데이터 제어 언어 : Data Control Language)
+    - 데이터베이스의 권한을 부여하거나 회수하는 데 사용
+    - GRANT, REVOKE
+    ``` sql
+    -- 권한 부여
+    GRANT 권한 ON 데이터베이스.테이블 TO 사용자;
+    -- 권한 회수
+    REVOKE 권한 ON 데이터베이스.테이블 FROM 사용자;
+    ```
+
+## MySQL의 데이터 타입
+
+### 숫자 유형 타입
+- 정수 타입
+    - TINYINT
+    `매우 작은 범위의 정수` (1바이트 -128 ~ 127)
+    - SMALLINT
+    `작은 범위의 정수` (2바이트 -32,768 ~ 32,767)
+    - INT or INTEGER
+    `표준 정수` (4바이트 약 -21억 ~ 21억)
+    - BIGINT
+    `큰 범위의 정수` (8바이트 -922경 ~ 922경)
+
+- 부동 소수점 유형
+    - FLOAT
+    `4바이트의 소수` (소수점 7자리까지 표현)
+    - DOUBLE
+    `8바이트의 소수` (소수점 15자리까지 표현)
+    - DECIMAL
+    `정확한 10진수를 표현`
+
+### 문자 유형 데이터 타입
+
+- CHAR(N)
+`고정 길이 문자` (1~255 까지 지정)
+- VARCHAR(N)
+`가변 길이 문자형` (1~65535 까지 지정)
+- LONGTEXT
+`최대 4GB 만큼의 TEXT 데이터 저장`
+
+### 날짜와 시간 데이터 타입
+
+- DATE
+`날짜 YYYY-MM-DD` (1001-01-01 ~ 9999-12-31)
+- TIME
+`시간 HH:MM:SS`
+- DATETIME
+`날짜와 시간 합친 정보 YYYY-MM-DD HH:MM:SS`
+- TIMESTAMP
+`날짜 시각 정보를 저장`
+- YEAR
+`연도 정보 YYYY`
+
+### 기타 유형
+- 이진 데이터 타입
+    - BINARY(N)
+    `고정길이 이진 데이터` (1~255)
+    - VARBINARY(N)
+    `가변길이 이진 데이터` (1~255)
+    - BLOB (Binary Large Object)
+    `큰 사이즈의 이진 데이터` (최대 65,535)
+    - LONGBLOB
+    `최대 4GB만큼의 이진 데이터 값`
+
+- 불리언 유형 타입
+    - BOOLEAN
+    `참, 거짓`
+- 열거형 유형 타입
+    - ENUM
+    `가능한 값 중 하나를 선택`
