@@ -31,7 +31,7 @@ public class FileExample {
 		
 		file = new File(dir,"Temp"); // 상위디렉토리, 하위에있는 폴더나 파일
 		System.out.println(file.getAbsolutePath()); // 매개변수 2개일 때는 공백은 상위디렉토리
-		System.out.println(file.getPath());
+		System.out.println(file.getPath()); // 현재 프로젝트에서의 경로
 		
 		// file.exist() - 해당 위치에 폴더나 파일이 존재하면 true 존재하지 않으면 false
 		if(!file.exists()) {

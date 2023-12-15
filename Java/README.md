@@ -136,3 +136,9 @@ Object에서 반환하는 해시코드는 주소를 정수로 변환해서 반�
 ## Chat App (TCP)
 <a href="./c17_chat_program_TCP/">채팅 앱(IP 변경 필수) - 추가 귓속말 기능, ThreadPool을 이용한 뻑남 방지</a>
 
+
+## JAVAFX
+<a href="../workspace_javafx/">JAVAFX</a>
+
+## JDBC
+<a href="../workspace_jdbc_mysql/">jdbc_mysql</a>
