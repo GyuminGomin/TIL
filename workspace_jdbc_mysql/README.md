@@ -9,6 +9,9 @@
 
 # 실습하기 위한 db 설정
 - mysql 쿼리 실행
+    - user > root
+    - password > 1234
+    - hostname > localhost:3306
 
 ``` sql
 CREATE SCHEMA sqldb;
