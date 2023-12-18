@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import member.dao.MemberDAO;
 import member.dto.BackUpMemberDTO;
 import member.dto.MemberDTO;
+import utils.DBUtil;
 
 public class MemberManagement extends AppBase{
 	
@@ -57,9 +58,7 @@ public class MemberManagement extends AppBase{
 	// 탈퇴한 회원 정보 
 	// 관리자만 확인 가능
 	private void deleteMember() {
-		if(loginMember == null
-				|| 
-		   !loginMember.getmId().equals("root")) {
+		if(loginMember == null || !loginMember.getmId().equals("root")) {
 			System.err.println("확인 할 수 없는 사용자 입니다.");
 			return;
 		}
@@ -75,6 +74,7 @@ public class MemberManagement extends AppBase{
 	@Override
 	protected void terminate() {
 		isRun = false;
+		DBUtil.close(DBUtil.getConnection());
 	}
 
 	@Override
@@ -216,9 +216,7 @@ public class MemberManagement extends AppBase{
 	 */
 	@Override
 	protected void delete() {
-		if(loginMember == null 
-				|| 
-		   loginMember.getmId().equals("root")) {
+		if(loginMember == null || loginMember.getmId().equals("root")) {
 			System.out.println("회원정보를 삭제 할 수 없습니다.");
 			return;
 		}
@@ -243,9 +241,7 @@ public class MemberManagement extends AppBase{
 			default : 
 				System.out.println("탈퇴가 취소 되었습니다.");
 		}
-		
 	}
-
 }
 
 

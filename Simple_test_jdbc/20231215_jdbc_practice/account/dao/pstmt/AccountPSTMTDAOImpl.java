@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import account.dao.AccountDAO;
 import account.dto.AccountDTO;
+import utils.DBUtil;
 
 public class AccountPSTMTDAOImpl implements AccountDAO {
 
@@ -18,24 +19,12 @@ public class AccountPSTMTDAOImpl implements AccountDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	public AccountPSTMTDAOImpl() {
-		try {
-			Properties prop = new Properties();
-			prop.load(new FileReader("prop/mysql.properties"));
-			conn = DriverManager.getConnection(
-				prop.getProperty("url"),
-				prop
-			);
-		} catch (IOException | SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	@Override
 	public void insert(AccountDTO account) {
 		// 작성
 		try {
 			String sql = "INSERT INTO tbl_account VALUES (?,?,?,?)";
+			conn = DBUtil.getConnection();
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, account.getAno());
@@ -47,10 +36,7 @@ public class AccountPSTMTDAOImpl implements AccountDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {}
+			DBUtil.close(pstmt);
 		}
 	}
 
@@ -59,12 +45,19 @@ public class AccountPSTMTDAOImpl implements AccountDAO {
 		int result = 0;
 		// 작성
 		String sql = "UPDATE tbl_account SET balance = ? WHERE ano = ?";
-		// TODO
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, account.getBalance());
-		pstmt.setString(2, account.getAno());
+		conn = DBUtil.getConnection();
 
-		pstmt.executeUpdate();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, account.getBalance());
+			pstmt.setString(2, account.getAno());
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(pstmt);
+		}
 
 		return result;
 	}
@@ -74,27 +67,23 @@ public class AccountPSTMTDAOImpl implements AccountDAO {
 		AccountDTO account = null;
 		// 작성
 		String sql = "SELECT * FROM tbl_account WHERE ano = ?";
+		conn = DBUtil.getConnection();
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, ano);
 
 			rs = pstmt.executeQuery();
+			account = getAccount(rs);
 
-			if(rs.next()) {
-				account = getAccount(rs);
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {}
-
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {}
+			/*
+			DBUtil.close(rs);
+			DBUtil.close(pstmt);
+			*/
+			DBUtil.close(rs, pstmt);
 		}
 		return account;
 	}
@@ -102,12 +91,14 @@ public class AccountPSTMTDAOImpl implements AccountDAO {
 	public AccountDTO getAccount(ResultSet rs) throws SQLException {
 		AccountDTO account = null;
 		// 작성
-		account = new AccountDTO(
-			rs.getString(1),
-			rs.getString(2),
-			rs.getInt(3),
-			rs.getString(4)
-		);
+		if (rs.next()) {
+			account = new AccountDTO(
+				rs.getString(1),
+				rs.getString(2),
+				rs.getInt(3),
+				rs.getString(4)
+			);
+		}
 		return account;
 	}
 	@Override
@@ -115,6 +106,7 @@ public class AccountPSTMTDAOImpl implements AccountDAO {
 		AccountDTO account = null;
 		// 작성
 		String sql = "SELECT * FROM tbl_account WHERE ano = ? AND password = ?";
+		conn = DBUtil.getConnection();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -122,22 +114,12 @@ public class AccountPSTMTDAOImpl implements AccountDAO {
 			pstmt.setString(2, password);
 
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				account = getAccount(rs);
-			}
+			account = getAccount(rs);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {}
-
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {}
+			DBUtil.close(rs, pstmt);
 		}
 		return account;
 	}
