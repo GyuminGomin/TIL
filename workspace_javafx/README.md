@@ -27,3 +27,21 @@ Type : SDK
 // vmArgs는 settings.json 파일에서 필요한 모듈만 사용할 수 있게 설정 할 수 있음
 ```
 
+# Javafx Scene Builder 설치 및 실행
+
+1. https://gluonhq.com/products/scene-builder/ 다음 사이트에서 Scene Builder 21.0.0 설치
+```
+Product : Scene Builder
+Platform : Windows Installer
+```
+
+2. SceneBuilder-21.0.0.msi 실행
+```
+폴더 경로 : C:\Users\admin\AppData\Local 아래에 (default 설정)
+```
+
+3. vscode에서 SceneBuilder extension for Visual Studio Extention 설치
+
+4. Ctrl+Shift+P 를 눌러 Configure Scene Builder path를 클릭해 `C:\Users\admin\AppData\Local\SceneBuilder` 경로 아래의 Scene Builder.exe 파일을 설정해주면 끝
+
+5. 마지막으로 생성한 fxml 파일을 우클릭해서 open in Scene Builder를 클릭하면 완료
