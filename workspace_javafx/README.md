@@ -47,10 +47,11 @@ Platform : Windows Installer
 5. 마지막으로 생성한 fxml 파일을 우클릭해서 open in Scene Builder를 클릭하면 완료
 
 # 참고
-```
-javaFX project를 vscode의 Extention을 설치해서 사용하면
-1. Container을 설정해서 생성할 수 없다. (불편함)
 
+### javaFX project를 vscode의 Extention을 설치해서 사용하면
+- Container을 설정해서 생성할 수 없다. (불편함)
+- 참고로 아래 `UserSnippet 설정`을 보면 Container을 자동 생성하기 위한 Snippets 설정을 해놓음 이걸 따라하면 해결 가능
+```
 따라서 eclipse에서 설치하는 방법을 기록
 
 1. javafx 플러그인 설치
