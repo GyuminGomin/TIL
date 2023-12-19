@@ -1,7 +1,5 @@
 # 🟦 TIL(Today I Learn Page)
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=GyuminGomin&layout=compact">
-
 
 ## <a href="./html/">📕HTML</a>  
 
@@ -15,4 +13,6 @@
 
 ## <a href="./DBMS/">📚DBMS</a>  
 
-## <a href="#">📒</a>  
+## <a href="#./workspace_javafx">📒JAVAFX</a>  
+
+## <a href="#./workspace_jdbc_mysql">📜JDBC-MYSQL</a>  
