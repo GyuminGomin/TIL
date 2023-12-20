@@ -13,6 +13,6 @@
 
 ## <a href="./DBMS/">📚DBMS</a>  
 
-## <a href="#./workspace_javafx">📒JAVAFX</a>  
+## <a href="./workspace_javafx">📒JAVAFX</a>  
 
-## <a href="#./workspace_jdbc_mysql">📜JDBC-MYSQL</a>  
+## <a href="./workspace_jdbc_mysql">📜JDBC-MYSQL</a>  
