@@ -5,7 +5,7 @@
             "type": "java",
             "name": "JavaFX Testing",
             "request": "launch",
-            "vmArgs": "--module-path 'C:\\Program Files\\Java\\javafx-sdk-17.0.9\\lib' --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path 'C:\\Program Files\\Java\\javafx-sdk-17.0.9\\lib' --add-modules javafx.controls,javafx.fxml,javafx.web"
             
         }
     ] 
