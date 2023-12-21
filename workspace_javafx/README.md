@@ -81,27 +81,29 @@ Windows > Preferences > JavaFX
 	"javafx" : {
 		"prefix": "!javafx",
 		"body" : [
-			"import java.io.IOException;",
-			"",
 			"import javafx.application.Application;",
 			"import javafx.fxml.FXMLLoader;",
-			"import javafx.scene.Parent;",
 			"import javafx.scene.Scene;",
 			"import javafx.stage.Stage;",
 			"",
-			"public class AppMain extends Application {",
+			"public class Main extends Application {",
 			"\t@Override",
 			"\tpublic void start(Stage primaryStage) {",
 			"\t\ttry {",
-			"\t\t\tParent root = FXMLLoader.load(",
-			"\t\t\t\tgetClass().getResource(\"$1\")",
+			"\t\t\t$1 root = FXMLLoader.load(",
+			"\t\t\t\tgetClass().getResource(\"$2\")",
 			"\t\t\t);",
 			"\t\t\tprimaryStage.setScene(new Scene(root));",
 			"\t\t\tprimaryStage.show();",
-			"\t\t} catch (IOException e) {",
+			"\t\t} catch (Exception e) {",
 			"\t\t\te.printStackTrace();",
 			"\t\t}",
-			"\t}"
+			"\t}",
+			"",
+			"\tpublic static void main(String[] args) {",
+			"\t\tlaunch(args);",
+			"\t}",
+			"}"
 		],
 		"description": "Appmain 자동생성"
 	}

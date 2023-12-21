@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="workspace_javafx.fx06_event_controller_bundle.e01_controller.RootController">
+    <children>
+      <Button id="btnId" fx:id="btn1" text="Button">
+         <styleClass>
+            <String fx:value="btnClass" />
+            <String fx:value="bg" />
+         </styleClass>
+      </Button>
+      <Button fx:id="btn2" text="Button" />
+      <Button fx:id="btn3" onAction="#closeEvent" text="Close" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</HBox>
