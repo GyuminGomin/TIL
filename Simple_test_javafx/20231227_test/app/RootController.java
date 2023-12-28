@@ -29,11 +29,13 @@ public class RootController implements Initializable {
     @FXML
     private Button btnReg, btnBarGraph;
 
+    ObservableList<Student> studentList;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
         // 목록을 저장할 List 생성
-        ObservableList<Student> studentList = FXCollections.observableArrayList();
+        studentList = FXCollections.observableArrayList();
         studentList.add(new Student("홍길동A", 40, 60, 80));
         studentList.add(new Student("홍길동B", 60, 80, 40));
         studentList.add(new Student("홍길동C", 80, 40, 60));
@@ -111,24 +113,27 @@ public class RootController implements Initializable {
                 String k = kor.getText();
                 String m = ma.getText();
                 String en = eng.getText();
-            }); // parseint 사용
 
-            // TODO
-            
-            // 다른 객체에서 호출하게 되면 결과가 달라지게된다. 
+                int int_k = Integer.parseInt(k);
+                int int_m = Integer.parseInt(m);
+                int int_en = Integer.parseInt(en);
+
+                studentList.add(new Student(n, int_k, int_m, int_en));
+            }); 
+
             Button btnCancel = (Button)parent.lookup("#btnCancel");
             btnCancel.setOnMouseClicked(e -> {
                 stage.close();
             });
 
-             
-
-            studentList.add(new Student("홍길동C", 80, 40, 60));
-
             Scene scene = new Scene(parent);
             stage.setScene(scene);
             stage.show();
+        });
 
+        // 막대 그래프 클릭시
+        btnBarGraph.setOnMouseClicked(e-> {
+            
         });
     }
 }
