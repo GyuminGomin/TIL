@@ -1,4 +1,4 @@
-package workspace_javafx.fx_chat_client.chat_client;
+package chat_client;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +14,7 @@ public class ClientMain extends Application {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Client.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
-			// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("CHAT_CLIENT");
 			primaryStage.setResizable(false);

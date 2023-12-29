@@ -1,0 +1,7 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&amp;display=swap */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+
+*{
+	-fx-font-family: Maplestory, "Noto Sans KR", sans-serif;
+}

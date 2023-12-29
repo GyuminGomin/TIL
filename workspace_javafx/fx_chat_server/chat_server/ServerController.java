@@ -1,4 +1,4 @@
-package workspace_javafx.fx_chat_server.chat_server;
+package chat_server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,11 +27,11 @@ public class ServerController implements Initializable{
 	private Button btnStartStop;
 	
 	// Client Thread를 관리할 스레드 풀
-	private ExecutorService serverPool;
+	ExecutorService serverPool;
 	// 운영체제에서 요청한 포트로 프로세스를 할당받아 client socket 연결관리를 할 class
-	private ServerSocket server;
+	ServerSocket server;
 	// 연결된 client의 닉네임을 key값, 서버에서 발신할 정보를 value로 저장하는 Map 객체
-	private Hashtable<String, PrintWriter> clients; // <Client Id, socket 출력 스트림>
+	Hashtable<String, PrintWriter> clients; // <Client Id, socket 출력 스트림>
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -60,8 +60,8 @@ public class ServerController implements Initializable{
 	// 서버 실행 담당
 	public void startServer() {
 		serverPool = Executors.newFixedThreadPool(50);
-		clients = new Hashtable<>();
-		
+		clients = new Hashtable<>(); // 수신처리를 하는 쓰레드가 계속 확장이 될 텐데, 다른 쓰레드의 간섭이 없도록 Lock 걸어주는 것(쓰레드간의 동기화) (synchronized)
+		// put, remove 같은 메서드가 synchronized
 		String port = txtPort.getText().trim(); // 포트 번호 전달
 		for (char c : port.toCharArray()) {
 			if (c < 48 || c > 57) {
@@ -114,6 +114,16 @@ public class ServerController implements Initializable{
 	
 	// 서버 종료 자원해제 담당
 	public void stopServer() {
+		
+		if (clients != null && !clients.isEmpty()) {
+			for (PrintWriter p : clients.values()) {
+				if (p != null) {
+					p.close();
+				}
+			}
+			clients.clear();
+		}
+		
 		
 		if(server != null && !server.isClosed()) {
 			try {

@@ -10,7 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workspace_javafx.fx_chat_client.chat_client.ClientController">
+<!-- &은 특수문자이기 때문에, &amp;로 작성해야함 (in fxml) -->
+<!-- 스타일시트에 등록하려면 ,@application.css로 등록 -->
+<BorderPane stylesheets="@https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&amp;display=swap, @application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chat_client.ClientController">
    <center>
       <TextArea fx:id="txtDisplay" editable="false" focusTraversable="false" prefWidth="400.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
