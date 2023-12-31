@@ -89,7 +89,7 @@ public class AppMain extends Application {
 			icons.add(image);
 			
 			// 2. URL
-			URL url = getClass().getResource("/e01_event_handler/puppy.png"); // javafx는 /라면, src 폴더의 위치
+			URL url = getClass().getResource("/workspace_javafx/fx05_event_handler/e01_event_handler/puppy.png"); // javafx는 /라면, src 폴더의 위치
 			System.out.println(url.getPath()); // src 폴더부터 찾으므로 문제 발생
 			System.out.println(url.toString()); // local root 경로부터 시작하므로 문제 발생 x
 			
