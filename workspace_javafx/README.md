@@ -227,3 +227,9 @@ Windows > Preferences > JavaFX
 	}
 }
 ```
+
+# 배포하기
+## 이 배포하기 과정을 하기 위해서는 일단 GUI가 구축되어 있는 서버 프로그램을 가지고 있어야 함
+<a href="./fx_chat_server/">chat_server</a>  
+<a href="./fx_chat_client/">chat_client</a>  
+<a href="">배포하기 참고 네이버 블로그</a>
