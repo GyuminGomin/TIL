@@ -16,3 +16,5 @@
 ## <a href="./workspace_javafx">📒JAVAFX</a>  
 
 ## <a href="./workspace_jdbc_mysql">📜JDBC-MYSQL</a>  
+
+## <a href="https://github.com/GyuminGomin/TIL/tree/jsp">JSP 공부</a>
