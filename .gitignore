@@ -1,0 +1,9 @@
+# ignore 확장자
+# *.classpath
+# *.project
+# *.settings
+
+# ignore directory
+.metadata/
+build/
+Servers/
