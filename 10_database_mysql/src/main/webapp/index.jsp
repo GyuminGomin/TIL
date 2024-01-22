@@ -38,6 +38,7 @@
 	%>
 	<h1> MAIN PAGE </h1>
 	<h3><a href="insertForm.jsp">회원정보 입력</a></h3>
+	<h3><a href="memberList.jsp">회원목록</a></h3>
 </body>
 </html>
 
