@@ -5,5 +5,4 @@
 
 # ignore directory
 .metadata/
-build/
 Servers/
