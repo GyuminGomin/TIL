@@ -6,8 +6,11 @@
 	// session 객체 무효화 // 내부에 있는 모든 속성 데이터 삭제
 	// session.invalidate();
 	
-	// TODO 로그아웃 요청 처리 시 cookie 정보도 삭제
-	
+	// 로그아웃 요청 처리 시 cookie 정보도 삭제
+	Cookie cookie = new Cookie("rememberMe", "");
+	cookie.setMaxAge(0);
+	cookie.setPath("/");
+	response.addCookie(cookie);
 %>
 
 <script>

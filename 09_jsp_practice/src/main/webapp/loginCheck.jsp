@@ -31,7 +31,19 @@
 			// 요청이 들어온 사용자 별로 생성이 되는 session 객체를 이용해서 브라우저가 종료되기 전까지 로그인 요청 처리가 정상적으로 수행된 사용자 정보를 저장하고 활용
 			session.setAttribute("loginMember", m);
 			
-			// TODO 자동로그인 요청 처리 추가
+			// 자동로그인 요청 처리 추가
+			// checked 상태면 value 존재, checked가 아니면 null
+			String rememberMe = request.getParameter("rememberMe");
+			if (rememberMe != null) {
+				//				new Cookie(name, value);
+				Cookie cookie = new Cookie("rememberMe", m.getId());
+				// 사용자 브라우저에 쿠키 정보를 15일간 저장
+				cookie.setMaxAge(60*60*24*15);
+				cookie.setPath("/");
+				// 응답 객체에 브라우저가 저장할 쿠키정보 저장
+				response.addCookie(cookie);
+			} // 자동 로그인용 쿠키 등록 완료
+			
 %>
 	<script>
 		alert('<%=m.getName()+"님 로그인 성공!"%>');

@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,7 +7,33 @@
 	// 사용자가 로그인된 상태인지를 session의 loginMember 속성값으로 판별
 	MemberVO loginMember = (MemberVO)session.getAttribute("loginMember");
 
-	// TODO cookie 정보를 이용한 자동 로그인 기능 추가
+	// cookie 정보를 이용한 자동 로그인 기능 추가
+	// request로 전달된 브라우저의 쿠키 목록
+	Cookie[] cookies = request.getCookies();
+	// 비로그인 상태에서 쿠키 정보가 전달 되면 자동로그인 작업 수행
+	if (loginMember == null && cookies != null) {
+		// 전달된 쿠키 정보 reading
+		for (Cookie c : cookies) {
+			// name - value
+			String name = c.getName();
+			// name이 rememberMe 라면 value == id
+			String value = c.getValue();
+			if (name.equals("rememberMe")) {
+				// 자동 로그인 용 쿠키 확인
+				// 등록된 회원 목록에서 id값(value)이 일치하는 사용자 검색
+				// (자동 로그인 요청한 사용자 id와 일치하는 회원 정보를 목록에서 검색)
+				List<MemberVO> memberList = (List<MemberVO>)application.getAttribute("memberList");
+				if (memberList != null && !memberList.isEmpty()) {
+					// 회원목록 list 정보가 존재할 경우에 확인
+					int index = memberList.indexOf(new MemberVO(value)); // 순서가 있는 리스트에서 indexOf는 파라미터로 전달받은 값의 위치 (equals로 비교하기 때문에)
+					if (index >= 0) { // 해당되는 녀석을 찾았다.. (음수라면 못 찾았다)
+						loginMember = memberList.get(index);
+						session.setAttribute("loginMember", loginMember);
+					}
+				}
+			}
+		}
+	}
 %>
    
 <!DOCTYPE html>
@@ -31,10 +58,4 @@
 		 	<li><a href="join.jsp">회원가입</a></li>
 		 	<% } %>
 		 </ul>
- </header>
- 
- 
- 
- 
- 
- 
+ 	</header>
