@@ -18,3 +18,5 @@ SELECT * FROM test_guestbook ORDER BY num DESC limit 0, 10;
 
 -- 2page, 한번에 게시물을 10개씩 출력 -- 11번째 인덱스부터 10개
 SELECT * FROM test_guestbook ORDER BY num DESC limit 10, 10;
+
+SELECT count(num) FROM test_guestbook;

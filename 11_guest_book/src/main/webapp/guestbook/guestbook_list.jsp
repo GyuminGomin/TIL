@@ -52,6 +52,7 @@
 		// 테이블에 pageCount만큼 검색할 limit의 시작 인덱스 번호
 		int startRow = 0;
 		
+		// 사용자가 요청한 page를 paramPag라는 파라미터 이름으로 전달
 		String paramPage = request.getParameter("page");
 		if (paramPage != null) {
 			currentPage = Integer.parseInt(paramPage);
@@ -111,6 +112,9 @@
 			// 129 : (129-1) / 10 + 1 == 13page
 			int maxPage = (totalCount-1) / pageCount + 1;
 			
+			// 최대 페이지 구하기 올림 방법
+			maxPage = (int)(Math.ceil((double)totalCount/pageCount));
+			
 			// 현재 요청 페이지에서 보여줄 시작 페이지 번호
 			int startPage = 0;
 			// 현재 요청 페이지에서 보여줄 마지막 페이지 번호
@@ -128,8 +132,13 @@
 			// 10page == 6 == (10-1) / 5 == 1 * displayPageNum + 1 == 6
 			// ...
 			startPage = (currentPage - 1) / displayPageNum * displayPageNum + 1;
+		
 			// 출력될 마지막 페이지 번호
 			endPage = startPage + (displayPageNum - 1);
+			
+			// end page 부터 구하기
+			endPage = (int)Math.ceil((double)currentPage / displayPageNum) * displayPageNum;
+			startPage = endPage - (displayPageNum - 1);
 			
 			// endPage가 maxPage를 벗어나면 endPage를 maxPage로 변경
 			if (endPage > maxPage) {
@@ -139,6 +148,9 @@
 		<tr>
 			<th>
 			<!-- 이전 페이지 블럭 -->
+				<% if(startPage > 5) { %>
+					<a href="<%=request.getContextPath()%>/guestbook/guestbook_list.jsp?page=<%=1%>">[처음]</a>
+					<% } %>
 				<% if(startPage != 1) { %>
 				<a href="<%=request.getContextPath()%>/guestbook/guestbook_list.jsp?page=<%=startPage-1%>">[이전]</a>
 				<% } %>
@@ -151,6 +163,9 @@
 				%>
 				<% if(endPage < maxPage) { %>
 				<a href="<%=request.getContextPath()%>/guestbook/guestbook_list.jsp?page=<%=endPage+1%>">[다음]</a>
+				<% } %>
+				<% if(currentPage < maxPage) { %>
+				<a href="<%=request.getContextPath()%>/guestbook/guestbook_list.jsp?page=<%=maxPage%>">[마지막]</a>
 				<% } %>
 			</th>
 			
