@@ -94,3 +94,38 @@ Content-Type : ex. text/html (대분류/확장자)
 
 배포서술자 = web.xml (deploy describer)
 
+
+
+### 페이징 처리
+1. 게시물 페이징 처리
+    - 사용자가 넘겨주는 데이터 : page(어느 페이지), perPageNum(페이지당 보여줄 게시물 개수)
+```
+만약 사용자가 page 를 1을 보내주면,
+1 - 1 * 5 = 0  [ (page -1) * perPageNum = startRow ]
+startRow(sql 쿼리에서 설정할 시작 인덱스)
+
+SELECT * FROM {테이블} ORDER BY DESC limit ?, ?;에서
+앞의 ?는 시작 인덱스 (0부터 시작), 뒤의 ?는 몇개를 가져올건지
+
+2 - 1 * 5 = 5 {<- 2페이지를 보낸다면}
+```
+
+- 구할 수 있는 데이터 : 즉 정리하자면, page, perPageNum, startRow를 알 수 있으면 게시물 페이징 처리가 가능하다.
+
+2. 페이지 페이징 처리
+    - 사용자가 넘겨주는 데이터 : page(어느 페이지), perPageNum(페이지당 보여줄 게시물 개수), 전체 게시물 개수(SELECT count(*) FROM {테이블};)
+```
+구해야 할 것은
+startPage(사용자가 보내준 페이지에서의 시작 페이지)
+Math.ceil(page/(double)perPageNum) * perPageNum; -> 나중에 생각
+endPage(사용자가 보내준 페이지에서의 마지막 페이지)
+Math.ceil(page/(double)perPageNum) * perPageNum; -> ceil(1 / 5.0) * 5 = 5 (마지막 페이지)
+maxPage(전체 페이지의 최대값)
+
+prev (이전으로 갈 수 있는가 boolean)
+first (가장 처음으로 갈 수 있는가 boolean)
+last (가장 마지막으로 갈 수 있는가 boolean)
+next (다음으로 갈 수 있는가 boolean)
+
+```
+- 구할 수 있는 데이터 : 정리하자면, page, perPageNum, totalCount 만 알 수 있으면 페이지 페이징 처리가 가능하다.
