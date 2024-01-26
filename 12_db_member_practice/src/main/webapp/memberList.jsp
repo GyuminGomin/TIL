@@ -15,6 +15,12 @@
 	String strPage = request.getParameter("page");
 	// 페이지당 보여줄 게시물 개수
 	String paramPerPageNum = request.getParameter("perPageNum");
+	// 이름으로 검색된 회원 목록
+	String search = request.getParameter("search");
+	// null - search 파라미터가 없을 경우에는 공백으로 치환하여 모든 정보 검색
+	if (search == null) {
+		search = "";
+	}
 	
 	int pageNum = 0, perPageNum = 0;
 	if (strPage != null && !strPage.equals("")) {
@@ -29,10 +35,12 @@
 	
 	String sql = "SELECT * FROM test_member ORDER BY num DESC";
 	sql = "SELECT * FROM test_member ORDER BY num DESC limit ?, ?";
+	sql = "SELECT * FROM test_member WHERE name LIKE concat('%',?,'%') ORDER BY num DESC limit ?, ?";
 	try {
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, cri.getStartRow());
-		pstmt.setInt(2, cri.getPerPageNum());
+		pstmt.setString(1, search);
+		pstmt.setInt(2, cri.getStartRow());
+		pstmt.setInt(3, cri.getPerPageNum());
 		rs = pstmt.executeQuery();
 		while (rs.next()) {
 			MemberVO m = new MemberVO(
@@ -59,14 +67,15 @@
 	// paging block 처리
 	try {
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT count(*) FROM test_member";
+		sql = "SELECT count(*) FROM test_member WHERE name LIKE concat('%',?,'%')";
 		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, search);
 		rs = pstmt.executeQuery();
 		int totalCount = 0;
 		if (rs.next()) {
 			totalCount = rs.getInt(1);
 		}
-		pm = new PageMaker(cri, totalCount, 2);
+		pm = new PageMaker(cri, totalCount, 10);
 	} catch (Exception e) {
 		e.printStackTrace();
 	} finally {
@@ -83,16 +92,43 @@
 	</tr>
 	<tr>
 		<td colspan="7">
-			<form>
-				<input type="hidden" name="page" value="<%=cri.getPage() %>"/>
+			<form> <!-- 액션이 생략되어 있으면 현재 페이지 url로 요청을 보냄 -->
+				<%-- <input type="hidden" name="page" value="<%=cri.getPage() %>"/> --%>
 				<select name="perPageNum" onchange="form.submit();">
-					<%for (int i=2; i <= 14; i+=2) { %>
+					<%for (int i=5; i <= 50; i+=5) { %>
 					<option value="<%=i%>" <%=cri.getPerPageNum() == i ? "selected" : ""%>><%=i %>개씩 보기</option>
 					<%}%>
 				</select>
+				<input type="text" value="<%=search %>" name="search" placeholder="검색할 사용자 이름 작성" style="border:1px solid gray; height:5px;" />
+				<input type="submit" value="검색" />
 			</form>
 		</td>
 	</tr>
+	<!-- 페이징 블럭 출력 -->
+	<%
+		if (!memberList.isEmpty()) {
+	%>
+		<tr>
+			<th colspan="7">
+				<%if(pm.isFirst()) { %>
+					<a href="<%=pm.makeQuery(1) %>&search=<%=search%>">[처음]</a>
+				<%} %>
+				<%if(pm.isPrev()) {%>
+					<a href="<%=pm.makeQuery(pm.getStartPage()-1) %>&search=<%=search%>">[이전]</a>
+				<%} %>
+				<% for (int i = pm.getStartPage(); i <=pm.getEndPage(); i++) { %>
+					<%-- <a href="?page=<%=i%>&perPageNum=<%=pm.getCri().getPerPageNum()%>">[<%=i %>]</a> --%>
+					<a href="<%=pm.makeQuery(i)%>&search=<%=search%>">[<%=i %>]</a>
+				<%} %>
+				<%if(pm.isNext()) { %>
+					<a href="<%=pm.makeQuery(pm.getEndPage()+1) %>&search=<%=search%>">[다음]</a>
+				<%} %>
+				<%if(pm.isLast()) {%>
+					<a href="<%=pm.makeQuery(pm.getMaxPage()) %>&search=<%=search%>">[마지막]</a>
+				<%} %>
+			</th>
+		</tr>
+	<%} %>
 	<tr>
 		<th>번호</th>
 		<th>아이디</th>

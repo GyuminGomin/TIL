@@ -113,7 +113,7 @@ SELECT * FROM {테이블} ORDER BY DESC limit ?, ?;에서
 - 구할 수 있는 데이터 : 즉 정리하자면, page, perPageNum, startRow를 알 수 있으면 게시물 페이징 처리가 가능하다.
 
 2. 페이지 페이징 처리
-    - 사용자가 넘겨주는 데이터 : page(어느 페이지), perPageNum(페이지당 보여줄 게시물 개수), 전체 게시물 개수(SELECT count(*) FROM {테이블};)
+    - 사용자가 넘겨주는 데이터 : page(어느 페이지), perPageNum(페이지당 보여줄 게시물 개수) displayPageNum(페이지당 보여줄 페이지 개수), 전체 게시물 개수(SELECT count(*) FROM {테이블};)
 ```
 구해야 할 것은
 startPage(사용자가 보내준 페이지에서의 시작 페이지)
