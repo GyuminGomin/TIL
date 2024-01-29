@@ -69,3 +69,18 @@ CREATE TABLE IF NOT EXISTS notice_board (
 	notice_date TIMESTAMP NOT NULL DEFAULT now()	-- 작성 시간
 );
 
+-- 질문과 답변 - 자유 게시판 table
+CREATE TABLE IF NOT EXISTS qna_board (
+	qna_num INT PRIMARY KEY AUTO_INCREMENT,			-- 글번호
+	qna_name VARCHAR(20) NOT NULL,					-- 작성자
+	qna_title VARCHAR(200) NOT NULL,				-- 글 제목
+	qna_content TEXT NOT NULL,						-- 글 내용
+	qna_writer_num INT NOT NULL,					-- 글 작성자 회원 번호
+	qna_readcount INT DEFAULT 0,					-- 조회수
+	qna_date TIMESTAMP DEFAULT now()				-- 글 작성 시간
+);
+
+-- 조회수 증가
+UPDATE qna_board SET qna_readcount = qna_readcount + 1 WHERE qna_num = 1;
+
+commit;
