@@ -11,6 +11,11 @@ public class BoardVO {
 	private String qna_title;
 	private String qna_content;
 	
+	// 답변용
+	private int qna_re_ref;	// group
+	private int qna_re_lev;	// view 출력
+	private int qna_re_seq;	// 답변글 정렬
+	
 	private int qna_writer_num;
 	private int qna_readcount;
 	private Date qna_date;
@@ -36,10 +41,28 @@ public class BoardVO {
 		this.qna_readcount = qna_readcount;
 		this.qna_date = qna_date;
 	}
-
+	
+	/*
+	 * 답변 용 컬럼이 추가된 생성자
+	 */
+	public BoardVO(int qna_num, String qna_name, String qna_title, String qna_content, int qna_re_ref,
+			int qna_re_lev, int qna_re_seq, int qna_writer_num, int qna_readcount, Date qna_date) {
+		this.qna_num = qna_num;
+		this.qna_name = qna_name;
+		this.qna_title = qna_title;
+		this.qna_content = qna_content;
+		this.qna_re_ref = qna_re_ref;
+		this.qna_re_lev = qna_re_lev;
+		this.qna_re_seq = qna_re_seq;
+		this.qna_writer_num = qna_writer_num;
+		this.qna_readcount = qna_readcount;
+		this.qna_date = qna_date;
+	}
+	
 	public int getQna_num() {
 		return qna_num;
 	}
+
 
 	public void setQna_num(int qna_num) {
 		this.qna_num = qna_num;
@@ -91,6 +114,30 @@ public class BoardVO {
 
 	public void setQna_date(Date qna_date) {
 		this.qna_date = qna_date;
+	}
+
+	public int getQna_re_ref() {
+		return qna_re_ref;
+	}
+
+	public void setQna_re_ref(int qna_re_ref) {
+		this.qna_re_ref = qna_re_ref;
+	}
+
+	public int getQna_re_lev() {
+		return qna_re_lev;
+	}
+
+	public void setQna_re_lev(int qna_re_lev) {
+		this.qna_re_lev = qna_re_lev;
+	}
+
+	public int getQna_re_seq() {
+		return qna_re_seq;
+	}
+
+	public void setQna_re_seq(int qna_re_seq) {
+		this.qna_re_seq = qna_re_seq;
 	}
 
 	@Override

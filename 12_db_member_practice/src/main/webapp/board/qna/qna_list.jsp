@@ -27,7 +27,7 @@
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	String sql = "SELECT * FROM qna_board ORDER BY qna_num DESC limit ?, ?";
+	String sql = "SELECT * FROM qna_board ORDER BY qna_re_ref DESC, qna_re_seq ASC limit ?, ?";
 	String countSql = "SELECT count(*) FROM qna_board";
 	
 	try {
@@ -41,6 +41,9 @@
 				rs.getString("qna_name"),
 				rs.getString("qna_title"),
 				rs.getString("qna_content"),
+				rs.getInt("qna_re_ref"),
+				rs.getInt("qna_re_lev"),
+				rs.getInt("qna_re_seq"),
 				rs.getInt("qna_writer_num"),
 				rs.getInt("qna_readcount"),
 				rs.getTimestamp("qna_date")
@@ -69,20 +72,23 @@
 	<form>
 		<table class="list">
 			<tr>
-				<th colspan="5">질문과 답변 게시판</th>
+				<th colspan="8">질문과 답변 게시판</th>
 			</tr>
 			<tr>
-				<th colspan="5"><%=pm %></th>
+				<th colspan="8"><%=pm %></th>
 			</tr>
 			<% if (loginMember != null) { %>
 			<tr>
-				<th colspan="5" style="text-align:right;">
+				<th colspan="8" style="text-align:right;">
 					<a href="qna_write.jsp">질문 작성하러 가기</a>
 				</th>
 			</tr>	
 			<%} %>
 			<tr>
 				<th>글번호</th>
+				<th>ref</th>
+				<th>lev</th>
+				<th>seq</th>
 				<th>글제목</th>
 				<th>작성자</th>
 				<th>작성시간</th>
@@ -93,8 +99,19 @@
 				<% for(BoardVO vo : qnaList) { %>
 			<tr>
 				<td><%=vo.getQna_num() %></td>
-				<td>
+				<td><%=vo.getQna_re_ref() %></td>
+				<td><%=vo.getQna_re_lev() %></td>
+				<td><%=vo.getQna_re_seq() %></td>
+				<td style="text-align:left;padding-left:5px;">
 					<!-- 제목 클릭 시 상세보기 페이지 이동 -->
+					
+					<% for (int i = 0; i < vo.getQna_re_lev(); i++) { %>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+					<%} %>
+					<% if (vo.getQna_re_lev() > 0) { %>
+					<!-- ㅂ + 한자 키 + 6 -->
+						└>
+					<%} %>
 					<a href="qna_read.jsp?qna_num=<%=vo.getQna_num() %>">
 						<%=vo.getQna_title() %>
 					</a>
@@ -106,7 +123,7 @@
 				<%} %>
 				<!-- 페이징 블럭 출력 -->
 				<tr>
-					<th colspan="5">
+					<th colspan="8">
 						<%if(pm.isFirst()) { %>
 							<a href="<%=pm.makeQuery(1) %>">[처음]</a>
 						<%} %>
@@ -128,7 +145,7 @@
 			<%} else { %>
 				<!-- 등록된 게시물 없음 -->
 			<tr>
-				<th colspan="5">등록된 게시물 없음</th>
+				<th colspan="8">등록된 게시물 없음</th>
 			</tr>
 			<%} %>
 		</table>

@@ -84,3 +84,34 @@ CREATE TABLE IF NOT EXISTS qna_board (
 UPDATE qna_board SET qna_readcount = qna_readcount + 1 WHERE qna_num = 1;
 
 commit;
+
+INSERT INTO qna_board (qna_name, qna_title, qna_content, qna_writer_num) SELECT qna_name, qna_title, qna_content, qna_writer_num FROM qna_board; -- 샘플 데이터 삽입
+
+-- 원본글(질문글)일 경우 자신의 게시글 번호를 저장
+-- 답변글일 경우 자신이 답변하는 원본글의 번호를 저장
+-- 동일한 그룹 번호일 경우 묶어서 출력
+ALTER TABLE qna_board ADD COLUMN qna_re_ref INT NOT NULL DEFAULT 0 AFTER qna_content;
+
+-- 기존에 등록된 행정보에 자기 글 번호로 qna_re_ref 컬럼 수정
+UPDATE qna_board SET qna_re_ref = qna_num;
+
+SELECT * FROM qna_board ORDER BY qna_re_ref DESC;
+
+INSERT INTO qna_board VALUES(null, '김홍', '44번의 답변글','없음',44,99,0,now());
+
+-- view 화면에서 출력될 답변 글의 깊이
+ALTER TABLE qna_board ADD COLUMN qna_re_lev INT NOT NULL DEFAULT 0 AFTER qna_re_ref;
+
+-- 원본글과 답변글 끼리의 정렬 순서 기준
+ALTER TABLE qna_board ADD COLUMN qna_re_seq INT NOT NULL DEFAULT 0 AFTER qna_re_lev;
+
+UPDATE qna_board SET qna_re_lev = qna_re_lev + 1, qna_re_seq = qna_re_seq + 1  WHERE qna_num = 60;
+
+SELECT * FROM qna_board ORDER BY qna_re_ref DESC, qna_re_seq ASC;
+
+INSERT INTO qna_board(qna_name, qna_title, qna_content, qna_writer_num) VALUES('김항', '첫질문', '첫질문이담', 90);
+
+-- 동일한 트랜잭션 내에서만 적용됨 (내가 INSERT한 ID 값만 가져온다) (MYSQL에만 있다)
+SELECT LAST_INSERT_ID();
+
+rollback;

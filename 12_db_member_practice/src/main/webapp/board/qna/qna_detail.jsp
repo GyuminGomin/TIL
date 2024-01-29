@@ -27,9 +27,12 @@
 				rs.getString(2),		// qna_name
 				rs.getString(3),		// qna_title
 				rs.getString(4),		// qna_content
-				rs.getInt(5),			// qna_writer_num
-				rs.getInt(6),			// qna_count
-				rs.getTimestamp(7)		// qna_date
+				rs.getInt(5),			// qna_re_ref
+				rs.getInt(6),			// qna_re_lev
+				rs.getInt(7),			// qna_re_seq
+				rs.getInt(8),			// qna_writer_num
+				rs.getInt(9),			// qna_readcount
+				rs.getTimestamp(10)		// qna_date
 			);
 		}
 	} catch (Exception e) {
@@ -65,6 +68,7 @@
 			<th colspan="2">
 			<!-- 로그인 상태 일 때 -->
 				<%if (loginMember != null) { %>
+					<a href="qna_reply.jsp?qna_num=<%=board.getQna_num()%>">[답변]</a>
 					<%if (loginMember.getNum() == board.getQna_writer_num()) { %>
 						<!-- 로그인 된 회원과 게시글 작성한 회원의 번호 일치 -->
 						<a href="qna_update.jsp?qna_num=<%=board.getQna_num()%>">[수정]</a>
