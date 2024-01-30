@@ -20,6 +20,8 @@ public class BoardVO {
 	private int qna_readcount;
 	private Date qna_date;
 	
+	private char qna_delete; // 게시글 삭제 요청 여부
+	
 	public BoardVO() {}
 
 	// 게시글 삽입에 필요한 생성자
@@ -138,6 +140,14 @@ public class BoardVO {
 
 	public void setQna_re_seq(int qna_re_seq) {
 		this.qna_re_seq = qna_re_seq;
+	}
+
+	public char getQna_delete() {
+		return qna_delete;
+	}
+
+	public void setQna_delete(char qna_delete) {
+		this.qna_delete = qna_delete;
 	}
 
 	@Override

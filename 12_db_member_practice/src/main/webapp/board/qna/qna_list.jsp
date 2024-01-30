@@ -48,6 +48,8 @@
 				rs.getInt("qna_readcount"),
 				rs.getTimestamp("qna_date")
 			);
+			char qna_delete = rs.getString("qna_delete").charAt(0);
+			vo.setQna_delete(qna_delete);
 			qnaList.add(vo);
 		}	
 		// 게시글 전체 개수 - 기존에 사용한 자원 해제
@@ -97,6 +99,8 @@
 			<% if(!qnaList.isEmpty()) { %>
 				<!-- 등록된 게시물 존재 -->
 				<% for(BoardVO vo : qnaList) { %>
+				<!-- 삭제되지 않은 게시물 -->
+				<% if (vo.getQna_delete() == 'N') { %>
 			<tr>
 				<td><%=vo.getQna_num() %></td>
 				<td><%=vo.getQna_re_ref() %></td>
@@ -120,7 +124,12 @@
 				<td><%=vo.getQna_date() %></td>
 				<td><%=vo.getQna_readcount() %></td>
 			</tr>
-				<%} %>
+					<%} else { %>
+					<tr>
+						<th colspan="8">삭제된 게시물 입니다.</th>
+					</tr>
+					<%} // end if else %>
+				<%} // end for%>
 				<!-- 페이징 블럭 출력 -->
 				<tr>
 					<th colspan="8">
