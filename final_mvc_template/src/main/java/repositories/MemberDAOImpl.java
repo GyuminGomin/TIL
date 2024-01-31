@@ -4,6 +4,7 @@ import java.sql.*;
 
 import beans.MemberVO;
 import util.DBCPUtil;
+import util.JDBCUtil;
 
 public class MemberDAOImpl implements MemberDAO {
 
@@ -109,8 +110,17 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public void withDrawMember(int num) {
-		// TODO Auto-generated method stub
-
+		conn = DBCPUtil.getConnection();
+		String sql = "UPDATE mvc_member SET joinYN = 'N', updatedate = now() WHERE num = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBCPUtil.close(pstmt, conn);
+		}
 	}
 
 	@Override
