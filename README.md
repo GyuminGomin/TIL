@@ -150,3 +150,8 @@ Model, View, Controller
 - 관리해야 할 파일이 많아진다.
 ```
 
+### EL, JSTL
+```
+jakarta jstl
+-> jstl, jstl-api 설치 (jar)
+```
