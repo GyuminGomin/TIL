@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" 
+xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
   <display-name>final_mvc_template</display-name>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
@@ -23,5 +24,25 @@
   <servlet-mapping>
     <servlet-name>MemberController</servlet-name>
     <url-pattern>*.mc</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MainServlet</display-name>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-class>controller.MainServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MainServlet</servlet-name>
+    <url-pattern>/main</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GoogleMailTest</display-name>
+    <servlet-name>GoogleMailTest</servlet-name>
+    <servlet-class>controller.GoogleMailTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoogleMailTest</servlet-name>
+    <url-pattern>/googleMailTest</url-pattern>
   </servlet-mapping>
 </web-app>

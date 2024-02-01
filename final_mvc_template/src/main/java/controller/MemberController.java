@@ -1,16 +1,15 @@
 package controller;
 
+import java.io.IOException;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.MemberService;
 import service.MemberServiceImpl;
 import util.FactoryUtil;
-
-import java.io.IOException;
 
 public class MemberController extends HttpServlet {
 	
@@ -45,6 +44,9 @@ public class MemberController extends HttpServlet {
 			// 회원 탈퇴 요청 페이지 호출
 			// 비밀번호를 다시 입력받아 일치할 경우 탈퇴 처리
 			view = "/member/withdraw.jsp";
+		} else if (command.equals("findPass.mc")) {
+			// 비밀번호 찾기 페이지 요청
+			view = "/member/findPass.jsp";
 		} else {
 			System.out.println("*.mc GET 방식으로 처리할 수 없는 요청");
 			response.sendError(405, "정상적인 요청이 아닙니다.");
@@ -60,6 +62,9 @@ public class MemberController extends HttpServlet {
 		String command = FactoryUtil.getCommand(request);
 		System.out.println("mc post - command : " + command);
 		// joinSubmit.mc - 회원가입 요청 처리
+		
+		// Cookie를 이용한 자동로그인 체크
+		MemberService.loginCheck(request);
 		
 		String view = "";
 		
@@ -79,6 +84,15 @@ public class MemberController extends HttpServlet {
 		} else if (command.equals("withdraw.mc")) {
 			System.out.println("회원 탈퇴 요청 처리 - POST");
 			ms.withDraw(request, response);
+		} else if (command.equals("findPass.mc")) {
+			// 이메일 아이디와 사용자 이름으로 비밀번호 찾기 메일 발송 요청 - POST
+			ms.findPassSubmit(request, response);
+		} else if (command.equals("passAccept.mc")) {
+			// 메일을 통해서 email(id) 와 코드로 비밀번호 찾기 페이지 요청
+			ms.changePassCode(request, response);
+		} else if (command.equals("changePass.mc")) {
+			// 새로운 비밀번호로 변경 요청
+			ms.changePass(request, response);
 		} else {
 			response.sendError(404); // 해당되는 요청 페이지에 대한 처리할 것이 없다. -> 404에러, 405에러 -> 요청은 있는데 받아올 데이터가 처리할 수 없을 때
 		}

@@ -150,8 +150,25 @@ Model, View, Controller
 - 관리해야 할 파일이 많아진다.
 ```
 
-### EL, JSTL
+### EL, JSTL 관련 api
 ```
 jakarta jstl
 -> jstl, jstl-api 설치 (jar)
+```
+
+### mail 관련 api
+```
+jakarta mail (10버전 이후)
+jakarta activation (10버전 이후)
+```
+
+```
+비밀번호 찾기 버튼
+     -> findPass.mc
+      -> email, 이름 입력 후 전송 
+      -> 랜덤 코드와 함께 메일 발송 
+      -> 메일서버에서 버튼 클릭 
+      -> 비밀번호 변경페이지 
+      -> 새 비밀번호 입력 
+      -> 비밀번호 변경 요청 처리
 ```

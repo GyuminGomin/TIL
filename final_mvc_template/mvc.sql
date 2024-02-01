@@ -22,7 +22,7 @@ commit;
 -- UPDATE mvc_member SET u_join = 'N' WHERE u_num = 회원번호;
 commit;
 
-SELECT * FROM mvc_member ORDER BY u_num DESC;
+SELECT * FROM mvc_member ORDER BY num DESC;
 
 -- 관리자가 아니고 탈퇴한 회원이 아닌 정보 출력
 SELECT * FROM mvc_member 
@@ -88,4 +88,9 @@ CREATE TABLE IF NOT EXISTS qna(
 	CONSTRAINT fk_member_writer FOREIGN KEY(qna_writer_num) REFERENCES mvc_member(num)
 );
 
+-- 비밀번호 찾기로 발송된 코드 정보를 저장할 테이블
+CREATE TABLE IF NOT EXISTS test_code (
+	id VARCHAR(300),				-- 발신한 이메일
+	code char(5)					-- 이메일로 발신한 랜덤 코드
+);
 

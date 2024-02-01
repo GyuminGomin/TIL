@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -44,6 +45,9 @@
 				<li><a href="join.mc">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
+				<li>
+					<a href="${context}/googleMailTest">Google Mail Test</a>
+				</li>
 			</ul>
 		</div>
 		<div>
