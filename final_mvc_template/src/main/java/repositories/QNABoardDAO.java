@@ -12,7 +12,7 @@ public interface QNABoardDAO {
 
 	// 페이징 처리된 게시물 목록
 	public ArrayList<BoardVO> getBoardList(Criteria cri);
-
+		
 	// 게시글 작성 요청
 	public void boardWrite(BoardVO board);
 

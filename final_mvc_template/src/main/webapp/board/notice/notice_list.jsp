@@ -23,7 +23,9 @@
 			<th>작성일</th>
 		</tr>
 		<!-- 게시글 목록 존재 시 -->
-		
+		<c:forEach val="notice" items="" >
+			
+		</c:forEach>
 		
 		<!-- 페이징 블럭 출력 -->
 		

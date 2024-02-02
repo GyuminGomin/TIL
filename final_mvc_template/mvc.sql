@@ -94,3 +94,6 @@ CREATE TABLE IF NOT EXISTS test_code (
 	code char(5)					-- 이메일로 발신한 랜덤 코드
 );
 
+SELECT * FROM test_code;
+
+SELECT * FROM qna;
